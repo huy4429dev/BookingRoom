@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,21 +48,28 @@ Route::namespace('Admin')->group(function () {
   });
 
 
+
   /*===========================================
       Admin Blog manage
       ===========================================*/
 
   Route::namespace('BlogManage')->group(function () {
-
     Route::get('/admin/blogs/index', 'BlogController@index');
-
     Route::get('/admin/blogs/create', 'BlogController@create');
-
-    Route::post('/admin/blogs/create', 'BlogController@save');
-
+    Route::post('/admin/blogs/create', 'BlogController@store');
     Route::get('/admin/blogs/detail/{id}', 'BlogController@detail');
+    Route::post('/admin/blogs/upload', 'BlogController@upload');
+    Route::post('/admin/blogs/delete/{id}', 'BlogController@delete');
+    Route::get('/admin/blogs/show/{id}', 'BlogController@show');
+    Route::post('/admin/blogs/update/{id}', 'BlogController@update');
+    Route::post('/admin/blogs/upload-edit/{id}', 'BlogController@uploadEdit');
+  });
+
+  Route::namespace('ContactManager')->group(function () {
+    Route::resource('admin/contact', 'ContactController');
   });
 });
+
 
 
 /*===========================================
@@ -81,4 +89,4 @@ Route::post('upload/image', 'CkeditorController@upload')->name('ckeditor.upload'
 
 
 
-Route::get('/test','TestController@index');
+Route::get('/test', 'TestController@index');
