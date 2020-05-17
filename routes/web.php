@@ -1,7 +1,10 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +68,21 @@ Route::namespace('Admin')->group(function () {
     Route::post('/admin/blogs/upload-edit/{id}', 'BlogController@uploadEdit');
   });
 
+  /*===========================================
+      Admin contact manager
+      ===========================================*/
   Route::namespace('ContactManager')->group(function () {
     Route::resource('admin/contact', 'ContactController');
+  });
+
+  /*===========================================
+      Admin manager user
+      ===========================================*/
+  Route::namespace('UserManager')->group(function () {
+    Route::resource('admin/admin-room', 'adminController');
+    Route::resource('admin/guest-room', 'guestController');
+    Route::resource('admin/master-room', 'masterController');
+    Route::resource('admin/staff-room', 'staffController');
   });
 });
 
@@ -90,3 +106,84 @@ Route::post('upload/image', 'CkeditorController@upload')->name('ckeditor.upload'
 
 
 Route::get('/test', 'TestController@index');
+
+
+
+/*===========================================
+    Make roles
+  ===========================================*/
+
+Route::get('/make-role', function () {
+  $role = Role::create(['name' => 'admin']);
+  $role = Role::create(['name' => 'staff']);
+  $role = Role::create(['name' => 'room master']);
+  $role = Role::create(['name' => 'room guest']);
+});
+
+// $permission = Permission::create(['name' => 'edit articles']);
+
+/*===========================================
+    Make permission
+  ===========================================*/
+
+Route::get('/make-permission', function () {
+
+  $permission = Permission::create(['name' => 'admin manage']);
+  $permission = Permission::create(['name' => 'staff manage']);
+});
+
+
+/*===========================================
+    Asign role
+  ===========================================*/
+
+Route::get('/asign-role', function () {
+  $role = Role::find(1);
+  $permissionAdmin =  Permission::find(1);
+  $permissionStaff =  Permission::find(2);
+  $role->givePermissionTo([$permissionAdmin]);
+});
+
+/*===========================================
+    Asign role
+  ===========================================*/
+
+Route::get('/asign-role-admin', function () {
+  $admin = User::find(2);
+  $admin->assignRole(['admin', 'staff', 'room master', 'room guest']);
+});
+
+
+/*===========================================
+    Make user
+  ===========================================*/
+
+Route::get('/make-user', function () {
+
+  $staff = User::create([
+    'name' => 'nhan vien',
+    'email' => 'nhanvien@gmail.com',
+    'password' => bcrypt(123456),
+  ]);
+
+  $staff->assignRole(['staff', 'room master', 'room guest']);
+
+  $rooMaster = User::create([
+    'name' => 'chu tro',
+    'email' => 'chutro@gmail.com',
+    'password' => bcrypt(123456),
+  ]);
+  $rooMaster->assignRole(['room master', 'room guest']);
+
+  $roomGuest = User::create([
+    'name' => 'khachthue',
+    'email' => 'khachthue@gmail.com',
+    'password' => bcrypt(123456),
+  ]);
+
+  $roomGuest->assignRole(['room guest']);
+});
+
+
+
+Route::post('upload/image', 'CkeditorController@upload')->name('ckeditor.upload');
