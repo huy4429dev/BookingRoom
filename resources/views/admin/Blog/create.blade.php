@@ -108,8 +108,10 @@
             .then(response => response.json())
             .then(data => {
                 if(data.url ){
+
                     document.querySelector('#thumbnailUrl').style.display = 'block'; 
                     document.querySelector('#thumbnailUrl').src = `http://127.0.0.1:8000/uploads/images/${data.url}`
+                    
                 }
             })
             .catch(error => {

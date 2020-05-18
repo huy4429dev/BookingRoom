@@ -15,8 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  return view('welcome');
+  return view('home');
 });
+
+
+Route::get('/about', function () {
+  return view('about');
+});
+
+Route::get('/contact', function () {
+  return view('contact');
+});
+
+Route::get('/blog', function () {
+  return view('blog');
+});
+
 
 Auth::routes();
 
@@ -32,6 +46,9 @@ Route::get('auth/facebook/callback', 'Auth\FacebookController@callback');
 
 
 Route::group(['middleware' => ['role:admin']], function () {
+    Route::get("hello", function(){
+      return 1;
+    });
 });
 
 
@@ -76,12 +93,6 @@ Route::namespace('Admin')->group(function () {
     Upload images
   ===========================================*/
 Route::post('upload/image', 'CkeditorController@upload')->name('ckeditor.upload');
-
-
-
-
-
-
 
 
 

@@ -117,7 +117,7 @@
                                 <span class="badge badge-success">hiển thị trang chủ</span>
                                 @endif
                             </td>
-                            <td>{{$post->description}}</td>
+                            <td>desc ...</td>
                             <td>
                                 <button class="btn btn-warning form-group editNews" data-id="{{$post->id}}" data-toggle="modal" data-target="#modalEditNews"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-danger form-group deleteNews" data-id="{{$post->id}}"><i class="far fa-trash-alt"></i></button>
@@ -421,6 +421,7 @@
             description: descriptionEdit,
             status: status
         };
+        
         fetch(`http://127.0.0.1:8000/admin/blogs/update/${id}`, {
                 method: 'POST',
                 headers: {
