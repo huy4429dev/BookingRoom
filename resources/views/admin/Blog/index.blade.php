@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" value="1" name="statusCheck">không hiện trang chủ
+                            <input type="radio" class="form-check-input" value="1" name="statusCheck" checked>không hiện trang chủ
                         </label>
                     </div>
                     <div class="form-check">

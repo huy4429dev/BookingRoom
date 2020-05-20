@@ -6,7 +6,7 @@
 <main class="about">
     <div class="container">
         <h2 class="about__heading display-4 my-5 py-3">
-            GIỚI THIỆU VEXERE.COM
+            GIỚI THIỆU ROOMBOOKING.COM
         </h2>
         <div class="row">
             <div class="col-3">

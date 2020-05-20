@@ -250,24 +250,19 @@ return [
             'icon'    => 'fas fa-id-card-alt',
             'submenu' => [
                 [
-                    'text' => 'Danh sách admin',
-                    'url'  => 'admin/admin-room',
-                    'icon'    => 'fas fa-id-card-alt',
-                ],
-                [
                     'text' => 'Danh sách nhân viên',
-                    'url'  => 'admin/staff-room',
-                    'icon'    => 'fas fa-id-card-alt',
+                    'url'  => 'admin/user/staff',
+                    'icon' => 'fas fa-paste',
                 ],
                 [
                     'text' => 'Danh sách chủ trọ',
-                    'url'  => 'admin/master-room',
-                    'icon'    => 'fas fa-id-card-alt',
+                    'url'  => 'admin/user/master-room',
+                    'icon' => 'fas fa-paste',
                 ],
                 [
                     'text' => 'Danh sách khách thuê',
-                    'url'  => 'admin/guest-room',
-                    'icon'    => 'fas fa-id-card-alt',
+                    'url'  => 'admin/user/guest-room',
+                    'icon' => 'fas fa-paste',
                 ]
             ],
         ],

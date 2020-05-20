@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Categories;
+use App\Models\Motelroom;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,10 +19,9 @@ use Spatie\Permission\Models\Permission;
 |
 */
 
-Route::get('/', function () {
-  return view('home');
-});
-
+/*===============================================================================
+                                   PAGE MEMBER 
+=================================================================================*/
 
 Route::get('/about', function () {
   return view('about');
@@ -33,6 +34,44 @@ Route::get('/contact', function () {
 Route::get('/blog', function () {
   return view('blog');
 });
+
+Route::get('/room/{slug}',function($slug){
+  $room = Motelroom::findBySlug($slug);
+  $room->count_view = $room->count_view +1;
+  $room->save();
+  $categories = Categories::all();
+  return view('detail',['motelroom'=>$room, 'categories'=>$categories]);
+});
+
+Route::namespace('Page')->group(function () {
+
+  Route::get('/', 'HomeController@index')->name('home');
+
+  Route::post('/search-motel', 'MotelRoomController@SearchMotelAjax');
+
+  Route::post('user/contact', 'ContactController@create');
+
+  Route::post('user/login', 'UserController@login')->name('user.login');
+
+  Route::post('user/register', 'UserController@register')->name('user.register');
+
+
+  Route::group(['middleware' => ['role:room master']], function () {
+
+
+    Route::group(['prefix' => 'user'], function () {
+
+      Route::get('post', 'UserController@createPost')->name('user.post.create');
+      Route::post('post/create', 'UserController@storePost')->name('user.post.store');
+      Route::get('profile', 'UserController@profile')->name('user.profile');
+      Route::post('profile/edit-avatar', 'UserController@editProfileAvatar')->name('user.profile.edit.avatar');
+      Route::post('profile/edit', 'UserController@editProfile')->name('user.profile.edit');
+    });
+  });
+});
+
+
+
 
 
 Auth::routes();
@@ -48,60 +87,67 @@ Route::get('auth/facebook', 'Auth\FacebookController@redirect');
 Route::get('auth/facebook/callback', 'Auth\FacebookController@callback');
 
 
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get("hello", function(){
-      return 1;
-    });
-});
-
+/*===============================================================================
+                                   ADMIN MANAGE 
+=================================================================================*/
 
 Route::namespace('Admin')->group(function () {
 
-  Route::get('/home', 'AdminController@index')->name('home');
 
-  /*===========================================
+  Route::group(['middleware' => ['role:admin']], function () {
+
+    Route::get('/home', 'AdminController@index')->name('home');
+
+    /*===========================================
       Admin Post manage
       ===========================================*/
 
-  Route::namespace('PostManage')->group(function () {
-    Route::get('/admin/posts', 'PostController@index');
-  });
+    Route::namespace('PostManage')->group(function () {
+      Route::get('/admin/posts', 'PostController@index');
+    });
 
 
 
-  /*===========================================
+    /*===========================================
       Admin Blog manage
       ===========================================*/
 
-  Route::namespace('BlogManage')->group(function () {
-    Route::get('/admin/blogs/index', 'BlogController@index');
-    Route::get('/admin/blogs/create', 'BlogController@create');
-    Route::post('/admin/blogs/create', 'BlogController@store');
-    Route::get('/admin/blogs/detail/{id}', 'BlogController@detail');
-    Route::post('/admin/blogs/upload', 'BlogController@upload');
-    Route::post('/admin/blogs/delete/{id}', 'BlogController@delete');
-    Route::get('/admin/blogs/show/{id}', 'BlogController@show');
-    Route::post('/admin/blogs/update/{id}', 'BlogController@update');
-    Route::post('/admin/blogs/upload-edit/{id}', 'BlogController@uploadEdit');
-  });
+    Route::namespace('BlogManage')->group(function () {
+      Route::get('/admin/blogs/index', 'BlogController@index');
+      Route::get('/admin/blogs/create', 'BlogController@create');
+      Route::post('/admin/blogs/create', 'BlogController@store');
+      Route::get('/admin/blogs/detail/{id}', 'BlogController@detail');
+      Route::post('/admin/blogs/upload', 'BlogController@upload');
+      Route::post('/admin/blogs/delete/{id}', 'BlogController@delete');
+      Route::get('/admin/blogs/show/{id}', 'BlogController@show');
+      Route::post('/admin/blogs/update/{id}', 'BlogController@update');
+      Route::post('/admin/blogs/upload-edit/{id}', 'BlogController@uploadEdit');
+    });
 
-  /*===========================================
+    /*===========================================
       Admin contact manager
       ===========================================*/
-  Route::namespace('ContactManager')->group(function () {
-    Route::resource('admin/contact', 'ContactController');
-  });
+    Route::namespace('ContactManager')->group(function () {
+      Route::resource('admin/contact', 'ContactController');
+    });
 
-  /*===========================================
+    /*===========================================
       Admin manager user
       ===========================================*/
-  Route::namespace('UserManager')->group(function () {
-    Route::resource('admin/admin-room', 'adminController');
-    Route::resource('admin/guest-room', 'guestController');
-    Route::resource('admin/master-room', 'masterController');
-    Route::resource('admin/staff-room', 'staffController');
+
+    Route::namespace('UserManager')->group(function () {
+      // Route::resource('admin/user/admin', 'adminController');
+      Route::resource('admin/user/guest-room', 'guestController');
+      Route::resource('admin/user/master-room', 'masterController');
+      Route::resource('admin/user/staff', 'staffController');
+    });
   });
 });
+
+/*===========================================
+    User
+  ===========================================*/
+
 
 
 
@@ -116,8 +162,9 @@ Route::post('upload/image', 'CkeditorController@upload')->name('ckeditor.upload'
 
 
 
-Route::get('/test', 'TestController@index');
-
+/*===============================================================================
+                                  MAKE USER 
+=================================================================================*/
 
 
 /*===========================================
@@ -131,7 +178,7 @@ Route::get('/make-role', function () {
   $role = Role::create(['name' => 'room guest']);
 });
 
-// $permission = Permission::create(['name' => 'edit articles']);
+
 
 /*===========================================
     Make permission
@@ -141,6 +188,7 @@ Route::get('/make-permission', function () {
 
   $permission = Permission::create(['name' => 'admin manage']);
   $permission = Permission::create(['name' => 'staff manage']);
+  $permission = Permission::create(['name' => 'post room']);
 });
 
 
@@ -149,20 +197,19 @@ Route::get('/make-permission', function () {
   ===========================================*/
 
 Route::get('/asign-role', function () {
-  $role = Role::find(1);
-  $permissionAdmin =  Permission::find(1);
-  $permissionStaff =  Permission::find(2);
-  $role->givePermissionTo([$permissionAdmin]);
+
+  $roleAdmin            = Role::find(1);
+  $roleStaff            = Role::find(2);
+  $roleRoomMaster       = Role::find(3);
+  $permissionAdmin      = Permission::find(1);
+  $permissionStaff      = Permission::find(2);
+  $permissionRoomMaster = Permission::find(3);
+
+  $roleAdmin->givePermissionTo([$permissionAdmin . $permissionStaff, $permissionRoomMaster]);
+  $roleStaff->givePermissionTo([$permissionStaff, $permissionRoomMaster]);
+  $roleRoomMaster->givePermissionTo([$permissionRoomMaster]);
 });
 
-/*===========================================
-    Asign role
-  ===========================================*/
-
-Route::get('/asign-role-admin', function () {
-  $admin = User::find(2);
-  $admin->assignRole(['admin', 'staff', 'room master', 'room guest']);
-});
 
 
 /*===========================================
@@ -171,28 +218,37 @@ Route::get('/asign-role-admin', function () {
 
 Route::get('/make-user', function () {
 
+  $admin = User::create([
+    'name' => 'admin',
+    'email' => 'admin@gmail.com',
+    'password' => bcrypt(123456),
+  ]);
+
+  $admin->assignRole(['admin']);
+
   $staff = User::create([
     'name' => 'nhan vien',
     'email' => 'nhanvien@gmail.com',
     'password' => bcrypt(123456),
   ]);
 
-  $staff->assignRole(['staff', 'room master', 'room guest']);
+  $staff->assignRole(['staff']);
 
   $rooMaster = User::create([
     'name' => 'chu tro',
     'email' => 'chutro@gmail.com',
     'password' => bcrypt(123456),
   ]);
-  $rooMaster->assignRole(['room master', 'room guest']);
 
-  $roomGuest = User::create([
-    'name' => 'khachthue',
-    'email' => 'khachthue@gmail.com',
-    'password' => bcrypt(123456),
-  ]);
+  $rooMaster->assignRole(['room master']);
 
-  $roomGuest->assignRole(['room guest']);
+  // $roomGuest = User::create([
+  //   'name' => 'khachthue',
+  //   'email' => 'khachthue@gmail.com',
+  //   'password' => bcrypt(123456),
+  // ]);
+
+  // $roomGuest->assignRole(['room guest']);
 });
 
 

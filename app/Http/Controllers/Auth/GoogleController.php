@@ -37,19 +37,31 @@ class GoogleController extends Controller
      
                 Auth::login($finduser);
     
-                return redirect('/home');
+                return redirect('/');
      
             }else{
+
+                $user = User::where('email',$user->email)->first();
+                if($user != null) {
+
+                    Auth::login($user);
+                    return redirect('/');
+
+                }
+
                 $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'google_id'=> $user->id,
-                    'password' => encrypt('123456dummy')
+                    'name'      => $user->name,
+                    'email'     => $user->email,
+                    'google_id' => $user->id,
+                    'password'  => '',
                 ]);
-    
+                
+                $newUser->assignRole(['room master']);
+
+
                 Auth::login($newUser);
      
-                return redirect('/home');
+                return redirect('/');
             }
     
         // } catch (Exception $e) {

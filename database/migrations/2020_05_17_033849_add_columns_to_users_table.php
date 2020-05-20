@@ -14,9 +14,9 @@ class AddColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone', 14);
-            $table->string('address', 255);
-            $table->string('avatar', 255);
+            $table->string('phone', 14)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('avatar', 255)->default('/images/default-avatar.jpg');
         });
     }
 

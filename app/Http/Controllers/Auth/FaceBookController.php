@@ -24,19 +24,29 @@ class FacebookController extends Controller
         $getInfo = Socialite::driver('facebook')->stateless()->user();
         $user = $this->createUser($getInfo);
         auth()->login($user);
-        return redirect()->to('/home');
+        return redirect()->to('/');
     }
     function createUser($getInfo)
     {
         $user = User::where('facebook_id', $getInfo->id)->first();
         if (!$user) {
+
+            $user = User::where('email', $getInfo->email)->first(); 
+
+            if($user != null){
+                return $user;
+            }
+
             $user = User::create([
                 'name'     => $getInfo->name,
                 'email'    => $getInfo->email,
                 'facebook_id' => $getInfo->id,
-                'password' => encrypt('123456dummy')
+                'password' => '',
             ]);
         }
+        
+        $user->assignRole(['room master']);
+
         return $user;
     }
 }

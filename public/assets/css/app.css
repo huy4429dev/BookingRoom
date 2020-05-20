@@ -123,7 +123,7 @@ a:hover {
 .header {
     height: 100vh;
     min-height: 400px;
-    background: lightblue url('../images/neu-ban-phai-di.png') no-repeat center /cover;
+    background: lightblue;
 }
 
 .header .header__content .header__heading {

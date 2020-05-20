@@ -21,6 +21,7 @@ class guestController extends Controller
         ->join('model_has_roles', 'model_has_roles.model_id', '=', 'Users.id')
         ->where('role_id', 4)
         ->get();
+        
     return view('admin.UserManager.GuestRoom.index', compact('adminUser'));
     }
 
