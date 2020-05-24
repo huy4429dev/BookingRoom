@@ -224,7 +224,7 @@
             status: status,
             thumbnail: thumbnailUrl
         };
-        fetch('http://127.0.0.1:8000/admin/blogs/create', {
+        fetch('http://localhost:8000/admin/blogs/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -288,7 +288,7 @@
         var formData = new FormData();
         var fileField = document.getElementById('thumbnail');
         formData.append('thumbnail', fileField.files[0]);
-        fetch('http://127.0.0.1:8000/admin/blogs/upload', {
+        fetch('http://localhost:8000/admin/blogs/upload', {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -299,7 +299,7 @@
             .then(data => {
                 if (data.url) {
                     document.querySelector('#thumbnailUrl').style.display = 'block';
-                    document.querySelector('#thumbnailUrl').src = `http://127.0.0.1:8000/uploads/images/${data.url}`;
+                    document.querySelector('#thumbnailUrl').src = `http://localhost:8000/uploads/images/${data.url}`;
                     document.querySelector("#thumbnailUrl").setAttribute("data-img", `${data.url}`);
                 }
             })
@@ -318,7 +318,7 @@
             var id = this.getAttribute('data-id');
             index = this.parentElement.parentElement.rowIndex;
             if (confirm("bạn có muốn xóa")) {
-                fetch(`http://127.0.0.1:8000/admin/blogs/delete/${id}`, {
+                fetch(`http://localhost:8000/admin/blogs/delete/${id}`, {
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -349,7 +349,7 @@
             var id = this.getAttribute('data-id');
             var index = this.parentElement.parentElement.rowIndex;
             document.querySelector("#btnEditNews").setAttribute("data-row", index);
-            fetch(`http://127.0.0.1:8000/admin/blogs/show/${id}`, {
+            fetch(`http://localhost:8000/admin/blogs/show/${id}`, {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -364,7 +364,7 @@
                         document.querySelector("#descriptionEdit").value = data.success.description;
                         CKEDITOR.instances.content1.setData(data.success.content);
                         document.querySelector("#thumbnailEdit").setAttribute("data-id", `${data.success.id}`);
-                        document.querySelector('#thumbnailUrl1').src = `http://127.0.0.1:8000/uploads/images/${data.success.thumbnail}`;
+                        document.querySelector('#thumbnailUrl1').src = `http://localhost:8000/uploads/images/${data.success.thumbnail}`;
                     }
                     if (data.error) {
                         alert("error");
@@ -383,7 +383,7 @@
         var thumbnailId = document.querySelector("#thumbnailEdit").getAttribute("data-id");
         var formData = new FormData();
         formData.append('thumbnail', thumbnailEdit.files[0]);
-        fetch(`http://127.0.0.1:8000/admin/blogs/upload-edit/${thumbnailId}`, {
+        fetch(`http://localhost:8000/admin/blogs/upload-edit/${thumbnailId}`, {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -394,7 +394,7 @@
             .then(data => {
                 if (data.url) {
                     document.querySelector('#thumbnailUrl1').style.display = 'block';
-                    document.querySelector('#thumbnailUrl1').src = `http://127.0.0.1:8000/uploads/images/${data.url}`;
+                    document.querySelector('#thumbnailUrl1').src = `http://localhost:8000/uploads/images/${data.url}`;
                     document.querySelector("#thumbnailUrl1").setAttribute("data-img", `${data.url}`);
                 }
             })
@@ -422,7 +422,7 @@
             status: status
         };
         
-        fetch(`http://127.0.0.1:8000/admin/blogs/update/${id}`, {
+        fetch(`http://localhost:8000/admin/blogs/update/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -443,7 +443,7 @@
                 }
                 if (data.success) {
                     $('#modalEditNews').modal('hide');
-                    alert('sửa tin thành công');
+                    alert('sửa tin tức thành công');
                     var rowTable = document.createElement('tr');
                     var tableBody = document.querySelector('#myTable tbody');
                     tableBody.deleteRow(row);

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -206,7 +208,6 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#611-menu
     |
     */
-
     'menu' => [
         [
             'text' => 'search',
@@ -259,11 +260,11 @@ return [
                     'url'  => 'admin/user/master-room',
                     'icon' => 'fas fa-paste',
                 ],
-                [
-                    'text' => 'Danh sách khách thuê',
-                    'url'  => 'admin/user/guest-room',
-                    'icon' => 'fas fa-paste',
-                ]
+                // [
+                //     'text' => 'Danh sách khách thuê',
+                //     'url'  => 'admin/user/guest-room',
+                //     'icon' => 'fas fa-paste',
+                // ]
             ],
         ],
         [

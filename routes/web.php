@@ -35,12 +35,12 @@ Route::get('/blog', function () {
   return view('blog');
 });
 
-Route::get('/room/{slug}',function($slug){
+Route::get('/room/{slug}', function ($slug) {
   $room = Motelroom::findBySlug($slug);
-  $room->count_view = $room->count_view +1;
+  $room->count_view = $room->count_view + 1;
   $room->save();
   $categories = Categories::all();
-  return view('detail',['motelroom'=>$room, 'categories'=>$categories]);
+  return view('detail', ['motelroom' => $room, 'categories' => $categories]);
 });
 
 Route::namespace('Page')->group(function () {
@@ -140,6 +140,16 @@ Route::namespace('Admin')->group(function () {
       Route::resource('admin/user/guest-room', 'guestController');
       Route::resource('admin/user/master-room', 'masterController');
       Route::resource('admin/user/staff', 'staffController');
+    });
+
+    /*===========================================
+      user profile
+      ===========================================*/
+
+    Route::namespace('Profile')->group(function () {
+      Route::get('admin/profile', 'ProfileController@index')->name('adminUser.profile');
+      Route::get('admin/profile/{id}', 'ProfileController@getProfile');
+      Route::post('admin/profile/upload', 'ProfileController@upload');
     });
   });
 });
