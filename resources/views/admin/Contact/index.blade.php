@@ -8,9 +8,9 @@
 <div class="d-flex justify-content-between">
     <h1>Danh sách Liên hệ</h1>
     <!-- Button trigger modal add news -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddContact">
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddContact">
         <i class="fas fa-plus"></i>
-    </button>
+    </button> -->
 
     <!-- Modal -->
     <div class="modal fade" id="modalAddContact" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -221,7 +221,7 @@
             title: title,
             content: content
         };
-        fetch('http://127.0.0.1:8000/admin/contact', {
+        fetch('http://localhost:8000/admin/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -298,7 +298,7 @@
             var id = this.getAttribute('data-id');
             index = this.parentElement.parentElement.rowIndex;
             if (confirm("bạn có muốn xóa")) {
-                fetch(`http://127.0.0.1:8000/admin/contact/${id}`, {
+                fetch(`http://localhost:8000/admin/contact/${id}`, {
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -329,7 +329,7 @@
             var id = this.getAttribute('data-id');
             var index = this.parentElement.parentElement.rowIndex;
             document.querySelector("#btnEditContact").setAttribute("data-row", index);
-            fetch(`http://127.0.0.1:8000/admin/contact/${id}/edit`, {
+            fetch(`http://localhost:8000/admin/contact/${id}/edit`, {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -379,7 +379,7 @@
             content: content,
             status: statusEdit
         };
-        fetch(`http://127.0.0.1:8000/admin/contact/${id}`, {
+        fetch(`http://localhost:8000/admin/contact/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -398,7 +398,7 @@
                     html += '</div>';
                 }
                 if (data.success) {
-                    alert('sửa tin thành công');
+                    alert('sửa liên hệ thành công');
                     $('#modalEditContact').modal('hide');
                     var tableBody = document.querySelector('#myTable tbody');
                     tableBody.deleteRow(rowEdit - 1);

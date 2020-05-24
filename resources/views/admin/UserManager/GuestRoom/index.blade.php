@@ -59,10 +59,10 @@
                                     @endif
                                 </td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
                                 <td>{{$user->address}}</td>
+                                <td>{{$user->phone}}</td>
                                 <td>
-                                    <a href="admin-room/{{$user->id}}/edit	"><button class="btn btn-warning form-group "><i class="far fa-edit"></i></button></a>
+                                    <button class="btn btn-warning form-group "><i class="far fa-edit"></i></button>
                                     <button class="btn btn-danger form-group deleteGuestRoomUser" data-id="{{$user->id}}"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
@@ -137,7 +137,7 @@
                 e.preventDefault();
                 $.ajax({
                     type: 'DELETE',
-                    url: `/admin/guest-room/${id}`,
+                    url: `guest-room/${id}`,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -173,6 +173,112 @@
                 }
             });
         })
+
+        // get data edit
+        $(".btnEditStaff").click(function() {
+            $('#modalEditUser').modal('show');
+            var id = $(this).attr("data-id");
+            var index = this.parentElement.parentElement.rowIndex;
+            document.querySelector(".btnSubmitEditUser").setAttribute("data-row", index);
+            $.ajax({
+                type: 'GET',
+                url: `staff/${id}/edit`,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    $("#modalNameUserEdit").val(data.success.name);
+                    $("#modalAddressUserEdit").val(data.success.address);
+                    $("#modalPhoneUserEdit").val(data.success.phone);
+                    $("#modalEmailUserEdit").val(data.success.email);
+                    $(".btnSubmitEditUser").attr("data-id", id);
+                }
+            });
+        });
+
+        // edit user
+        var btnEditUser = $(".btnSubmitEditUser");
+        btnEditUser.click(function() {
+            const name = $("#modalNameUserEdit").val();
+            const email = $("#modalEmailUserEdit").val();
+            const address = $("#modalPhoneUserEdit").val();
+            const phone = $("#modalAddressUserEdit").val();
+            const id = $(this).attr("data-id");
+            var rowEdit = $(this).attr('data-row');
+            const data = {
+                name: name,
+                email: email,
+                address: address,
+                phone: phone,
+            };
+            fetch(`staff/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    body: data ? JSON.stringify(data) : null,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var html = '';
+                    if (data.error) {
+                        html = '<div class="alert alert-danger">'
+                        data.error.forEach(err => {
+                            html += `<p>${err}</p>`
+                        })
+                        html += '</div>';
+                    }
+                    if (data.success) {
+                        $('#modalEditUser').modal('hide');
+                        alert('sửa user thành công');
+                        var rowTable = document.createElement('tr');
+                        var tableBody = document.querySelector('#myTable tbody');
+                        tableBody.deleteRow(rowEdit - 1);
+                        var row = tableBody.insertRow(rowEdit - 1);
+                        var row = tableBody.insertRow(row);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        cell1.innerHTML = data.success.name;
+                        cell2.innerHTML = data.success.email;
+                        cell3.innerHTML = data.success.address;
+                        cell4.innerHTML = data.success.phone;
+                        cell5.innerHTML = `<button class="btn btn-warning form-group" id="btnEditStaff" data-id="${data.success.id}"><i class="far fa-edit"></i></button>
+                                <button class="btn btn-danger form-group deleteNews" data-id="${data.success.id}"><i class="far fa-trash-alt"></i></button>`;
+                    }
+                })
+                .catch((error) => {
+                    console.log('eo dc', error);
+                });
+        })
+
+        // delete user
+        $(".btnDeleteStaff").click(function() {
+            if (confirm("bạn có muốn xóa")) {
+                var table = $("#myTable");
+                var id = $(this).attr('data-id');
+                index = this.parentElement.parentElement.rowIndex;
+                fetch(`staff/${id}`, {
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.success);
+                            table.deleteRow(index);
+                        }
+                    })
+                    .catch(error => {
+                        alert("xóa user không thành công");
+                    });
+            }
+        });
     })
 </script>
 @stop
