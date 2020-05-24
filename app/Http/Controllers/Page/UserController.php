@@ -89,6 +89,9 @@ class UserController extends Controller
          'categories' => $categories
       ]);
    }
+
+
+   
    public function  storePost(Request $request)
    {
 
@@ -163,15 +166,30 @@ class UserController extends Controller
       return redirect('/user/post')->with('success', 'Đăng tin thành công. Vui lòng đợi Admin kiểm duyệt');
    }
 
-   public function profile()
+
+   public function editPost($slug)
    {
-      return view('user_profile');
-      // $mypost = Motelroom::where('user_id', Auth::user()->id)->get();
-      // $categories = Categories::all();
-      // return view('home.profile', [
-      //    'categories' => $categories,
-      //    'mypost' => $mypost
-      // ]);
+      $post =  Motelroom::findBySlug($slug);
+      if(!$post == null){
+         $post = $post->where('user_id', Auth::user()->id)->where('slug',$slug)->first();
+         $district = District::all();
+         $categories = Categories::all();
+         return view('edit_post', [
+            'district' => $district,
+            'categories' => $categories,
+            'post' => $post,
+         ]);
+      }
+      return "404 NOT FOUND";
+   }
+
+   public function profile()
+
+   {
+      $mypost = Motelroom::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(5);
+      return view('user_profile', [
+         'mypost' => $mypost,
+      ]);
    }
 
    public function editProfile(Request $req)

@@ -21,6 +21,13 @@
         a.nav-link {
             color: white;
         }
+
+        .md-form input {
+            font-size: 16px;
+        }
+
+  
+
     </style>
     @yield('css')
 </head>
@@ -139,28 +146,28 @@
                                 </ul>
                                 <div class="md-form form-sm mb-5">
                                     <i class="fas fa-envelope prefix"></i>
-                                    <input  id="modalLRInput15" class="form-control form-control-sm validate" name="txtname">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput15" >Họ tên</label>
+                                    <input id="modalLRInput15" class="form-control form-control-sm validate" name="txtname">
+                                    <label data-error="wrong" data-success="right" for="modalLRInput15">Họ tên</label>
                                 </div>
 
                                 <div class="md-form form-sm mb-5">
                                     <i class="fas fa-envelope prefix"></i>
                                     <input type="email" id="modalLRInput12" class="form-control form-control-sm validate" name="re-txtemail">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput12" >Email</label>
+                                    <label data-error="wrong" data-success="right" for="modalLRInput12">Email</label>
                                 </div>
 
                                 <div class="md-form form-sm mb-5">
                                     <i class="fas fa-lock prefix"></i>
                                     <input type="password" id="modalLRInput13" class="form-control form-control-sm validate" name="re-txtpass">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput13" >Mật khẩu</label>
+                                    <label data-error="wrong" data-success="right" for="modalLRInput13">Mật khẩu</label>
                                 </div>
 
                                 <div class="md-form form-sm mb-4">
                                     <i class="fas fa-lock prefix"></i>
                                     <input type="password" id="modalLRInput14" class="form-control form-control-sm validate" name="txt-repass">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput14" >Nhập lại mật khẩu</label>
+                                    <label data-error="wrong" data-success="right" for="modalLRInput14">Nhập lại mật khẩu</label>
                                 </div>
-                             
+
                                 <div class="text-center form-sm mt-2">
                                     <button id="btnRegister" class="btn btn-info">Đăng ký <i class="fas fa-sign-in ml-1"></i></button>
                                 </div>
@@ -307,10 +314,10 @@
                         </h4>
                         <ul class="footer__category-street">
                             <li class="footer__street-item">
-                                <img src="./assets/images/certificate1.png" alt="" class="img-fluid">
+                                <img src="{{url('/assets/images/certificate1.png')}}" alt="" class="img-fluid">
                             </li>
                             <li class="footer__street-item">
-                                <img src="./assets/images/certificate3.png" alt="" class="img-fluid">
+                                <img src="{{url('/assets/images/certificate3.png')}}" alt="" class="img-fluid">
                             </li>
                         </ul>
                     </div>
@@ -360,10 +367,10 @@
         var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 
-        let btnLogin        = document.querySelector('#btnLogin');
-        let btnRegister     = document.querySelector('#btnRegister');
-        let loginErr        = document.querySelector('#errLogin');
-        let registerErr     = document.querySelector('#errRegister');
+        let btnLogin = document.querySelector('#btnLogin');
+        let btnRegister = document.querySelector('#btnRegister');
+        let loginErr = document.querySelector('#errLogin');
+        let registerErr = document.querySelector('#errRegister');
         let successRegister = document.querySelector('#successRegister');
 
         function Login() {
@@ -391,7 +398,7 @@
                 .then(data => {
 
                     console.log(data);
-                    
+
                     if (data === 'loginSuccess') {
                         window.location.href = '/';
                     }
@@ -413,7 +420,7 @@
         }
 
 
-        function Register(){
+        function Register() {
 
             let url = "{{url('user/register')}}";
 
@@ -422,7 +429,7 @@
             let txtpass = document.querySelector('input[name="re-txtpass"]').value;
             let txtRepass = document.querySelector('input[name="txt-repass"]').value;
 
-            
+
             let data = {
 
                 txtemail: txtemail,
@@ -432,7 +439,7 @@
 
             };
 
-            
+
 
             fetch(url, {
                     method: 'POST',
@@ -446,9 +453,9 @@
                 .then(data => {
 
                     console.log(data);
-                    
+
                     if (data === 'registerSuccess') {
-                        successRegister.classList.add('alert','alert-success');
+                        successRegister.classList.add('alert', 'alert-success');
                         successRegister.innerHTML = 'Tạo tài khoản thành công';
                     }
 

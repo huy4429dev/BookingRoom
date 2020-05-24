@@ -25,6 +25,10 @@ class Motelroom extends Model
         return $this->hasMany('App\Models\Reports','id_motelroom','id');
     }
 
+    public function roomguest(){
+        return $this->hasMany('App\Models\RoomGuest','room_motel_id','id');
+    }
+
     public function sluggable()
     {
         return [

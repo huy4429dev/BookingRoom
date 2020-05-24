@@ -31,17 +31,6 @@ Route::get('/contact', function () {
   return view('contact');
 });
 
-Route::get('/blog', function () {
-  return view('blog');
-});
-
-Route::get('/room/{slug}',function($slug){
-  $room = Motelroom::findBySlug($slug);
-  $room->count_view = $room->count_view +1;
-  $room->save();
-  $categories = Categories::all();
-  return view('detail',['motelroom'=>$room, 'categories'=>$categories]);
-});
 
 Route::namespace('Page')->group(function () {
 
@@ -49,12 +38,47 @@ Route::namespace('Page')->group(function () {
 
   Route::post('/search-motel', 'MotelRoomController@SearchMotelAjax');
 
-  Route::post('user/contact', 'ContactController@create');
 
-  Route::post('user/login', 'UserController@login')->name('user.login');
+/*===========================================
+      User
+  ===========================================*/
 
-  Route::post('user/register', 'UserController@register')->name('user.register');
 
+  Route::group(['prefix' => 'user'], function () {
+    
+      Route::post('contact', 'ContactController@create');
+    
+      Route::post('login', 'UserController@login')->name('user.login');
+    
+      Route::post('register', 'UserController@register')->name('user.register');
+
+  });
+
+/*===========================================
+      Blog
+  ===========================================*/
+
+  Route::group(['prefix' => 'blog'], function () {
+
+     Route::get('/', 'BlogController@index');
+     Route::get('/{id}', 'BlogController@detail'); 
+
+  });
+
+  /*===========================================
+      Room
+  ===========================================*/
+
+  Route::group(['prefix' => 'room'], function () {
+
+    Route::get('/','MotelRoomController@index');
+    Route::get('/{slug}','MotelRoomController@detail');
+    Route::post('/{slug}/add-customer','MotelRoomController@addCustomer');
+    
+
+  });
+  
+  
 
   Route::group(['middleware' => ['role:room master']], function () {
 
@@ -63,6 +87,7 @@ Route::namespace('Page')->group(function () {
 
       Route::get('post', 'UserController@createPost')->name('user.post.create');
       Route::post('post/create', 'UserController@storePost')->name('user.post.store');
+      Route::get('post/edit/{slug}', 'UserController@editPost')->name('user.post.edit');
       Route::get('profile', 'UserController@profile')->name('user.profile');
       Route::post('profile/edit-avatar', 'UserController@editProfileAvatar')->name('user.profile.edit.avatar');
       Route::post('profile/edit', 'UserController@editProfile')->name('user.profile.edit');
