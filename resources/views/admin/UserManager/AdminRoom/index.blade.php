@@ -133,7 +133,7 @@
             $('#modalProfileAdmin').modal('show');
             var id = $(this).attr("data-id");
             $.ajax({
-                url: `admin-room/${id}`,
+                url: `http://localhost:8000/admin-room/${id}`,
                 type: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
