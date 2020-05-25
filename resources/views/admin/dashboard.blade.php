@@ -5,11 +5,11 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Trang quản trị nhà trọ số 1 hiện nay</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Xin chào bạn đến với trang quản trị Booking room</p>
 @stop
 
 @section('css')

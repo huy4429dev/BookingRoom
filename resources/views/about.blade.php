@@ -43,74 +43,51 @@
                             Giới thiệu
                         </h4>
                         <p class="about__content">
-                            Được thành lập từ năm 2013 với 3 đồng sáng lập: anh Trần Nguyễn Lê Văn, anh Đào Việt
-                            Thắng và
-                            anh Lương Ngọc Long, công ty cổ phần VeXeRe đã xây dựng được tên tuổi hàng đầu trong
-                            ngành xe
-                            khách, với bề dày hoạt động trong lĩnh vực Thương mại điện tử, Công nghệ và du lịch.
-                            VeXeRe tự
-                            hào là đơn vị đi đầu trong sự nghiệp cách mạng ngành xe khách Việt Nam bao gồm 3 giải
-                            pháp: đặt
-                            vé thông minh cho hành khách, phần mềm quản lí hiệu quả cho nhà xe (BMS - Bus Management
-                            System)
-                            và phần mềm hỗ trợ bán vé hiệu quả cho đại lý (AMS- Agent Management System).
+                        Với mong muốn xây dựng một trang web thật PRO chuyên cung cấp thông tin nhà trọ phòng trọ cho mọi người, khi mà ngày nay nhu cầu nhà trọ phòng trọ ngày càng tăng ở các thành phố lớn nhất là Hà Nội và TP. Hồ Chí Minh.
 
-                            Hiện tại, VeXeRe.com là hệ thống vé xe lớn nhất Việt Nam, với hơn 550 hãng xe hợp tác
-                            bán vé với
-                            VeXeRe, phủ rộng hơn 2600 tuyến đường trong và ngoài nước giúp người dùng có thể tìm
-                            thông tin
-                            chuyến xe, hãng xe, và mua vé trực tuyến dễ dàng. Đồng thời, VeXeRe.com còn cung cấp
-                            những đánh
-                            giá của các hành khách đã đi những hãng xe này. Hành khách có thể dễ dàng lựa chọn trước
-                            chỗ
-                            ngồi yêu thích, thanh toán vé trực tuyến, tiền mặt tại các cửa hàng tiện lợi trên cả
-                            nước.
+Đối với cách tiếp cận thông tin truyền thống đã không được truyền đến mọi người một cách kịp thời đúng lúc.
 
-                            Phần mềm quản lý hãng xe VeXeRe (BMS ) đang được hơn 500 hãng xe cả nước tin dùng, phần
-                            mềm hỗ
-                            trợ các nhà xe thay đổi hình thức quản lý thủ công để quản lý hiệu quả và tối ưu hóa
-                            doanh thu,
-                            giảm thiểu chi phí. Đây là là cuộc cách mạng trọng việc công nghệ hóa ngành xe khách.
+Chính vì nắm bắt được tình hình thực tế đó mà chúng tôi đã thành lập website  với mong muốn trở thành một kênh truyền thông phổ biến nhà trọ, phòng trọ hữu ích cho mọi người.
 
-                            Phần mềm hỗ trợ đại lý bán vé AMS với hơn 5000 đại lý sử dụng, tăng doanh thu bán vé của
-                            đại lý
-                            và giúp đại lý hỗ trợ chăm sóc khách tốt hơn.
+Nếu trước đây việc cho thuê nhà, cho thuê phòng trọ đều dán giấy đăng quảng cáo ở các nơi công cộng rất là mất vẽ mỹ quang đô thị. Thì ngày nay các bạn có thể đăng tin trên đây rất tiện lợi, với phương tiện truyền thông được phổ biến rộng rãi tin đăng của bạn sẽ được hàng ngàn người biết đến.
 
-                            Những nổ lực của VeXeRe đã được 3 quỹ đầu tư mạo hiểm công nhận và đồng hành với tư cách
-                            nhà đầu
-                            tư: CyberAgent ventures - Nhật Bản, Pix Vine Capital - Singapore, Spiral Ventures -
-                            Singapore.
+Website ra đời sẽ góp phần giải quyết được các vấn đề thuê trọ hiện nay, và giúp mọi người tìm kiếm nhà trọ, chỗ ở phù hợp và dễ dàng. Hy vọng Phongtro123.com sẽ là địa chỉ quen thuộc cho mọi người.
+
+Website với giao diện thân thiện dễ sử dụng và hướng đến người dùng, các chuyên mục được phân chia rất rõ ràng và tim kiếm tin đăng rất chi tiết.
                         </p>
                     </li>
                     <li class="about__content-item">
                         <h4 class="about__title  ">
-                            TẦM NHÌN
+                        Bạn có thể tìm phòng trọ nhà trọ, tìm người ở ghép, tìm nhà cho thuê theo:
                         </h4>
                         <p class="about__content">
                             <h5 style="font-size: 24px; font-weight: 400;" class="my-4">Góp phần cho hành trình của bạn
                                 hạnh phúc hơn</h5>
-                            Trải qua hàng nghìn năm, lịch sử nhân loại đã có những bước tiến nhảy vọt, chủ yếu do
-                            cải thiện năng suất lao động. Tin tưởng vào điều này, VeXeRe mong muốn có thể góp phần
-                            cải thiện và năng cao đời sống người dân thông qua khả năng sáng tạo đổi mới và ứng dụng
-                            công nghệ, đáp ứng mọi nhu cầu trong mảng du lịch và ngành vận tải.
+                                + Quận huyện, chuyên mục, theo giá, theo diện tích.
+
+- Đăng tin cho thuê phòng trọ, nhà trọ, nhà nguyên căn, cho thuê căn hộ chung cư với đầy đủ tính năng
+
++ Chức năng quản lý bài viết cho mỗi thành viên
+
++ Chức năng đăng tin lên top cho người đăng tin
+
++ Chức năng xóa, sửa, hạ tin đăng nhưng vẫn còn lưu trên hệ thống vv...
                         </p>
                     </li>
                     <li class="about__content-item">
                         <h4 class="about__title ">
-                            Sứ mệnh
+                            Các dịch vụ chính:
                         </h4>
                         <h5 style="font-size: 24px; font-weight: 400;" class="my-4">Góp phần cho hành trình của bạn
                             hạnh phúc hơn</h5>
                         <p class="about__content">
-                            Mỗi chúng ta đều sẽ có những chuyến đi và chuyến đi có thể sẽ là khởi đầu cho những hành
-                            trình thú vị và hạnh phúc, thay đổi cuộc đời của mỗi người. Vì vậy, sứ mệnh mà VeXeRe
-                            hướng tới không chỉ gói gọn là những chuyến đi, mà đó chính là hành trình cuộc đời của
-                            mỗi người. VeXeRe mong muốn đồng hành và góp phần cho mỗi hành trình ấy sẽ hạnh phúc
-                            trọn vẹn hơn.
+                        - Đăng thông tin quảng cáo cho thuê phòng trọ, nhà trọ, thuê nhà nguyên căn, cho thuê căn hộ, tìm người ở ghép...
 
-                            Đã hạnh phúc thì sẽ có hạnh phúc hơn: đó có thể là những chuyến đi giá rẻ hơn tạo điều
-                            kiện cho nhiều người được đi du lịch hơn, nhiều người được tiếp cận với những dịch vụ
-                            tốt hơn, với nhiều trải nghiệm hạnh phúc và ý nghĩa hơn.
+- Đăng banner quảng cáo.
+
+- Dịch vụ chụp ảnh tận nhà, miễn phí hoàn toàn cho chủ nhà trọ, phòng trọ, nhà  nguyên căn.
+
+Chúng tôi luôn cố gắng đem lại những thông tin nhanh chóng và chính xác cho mọi người. Rất mong nhận được sự ủng hộ giúp đỡ của mọi người cùng nhau xây dựng một kênh thông tin truyền thông về nhà trọ.
                         </p>
                     </li>
                 </ul>
