@@ -47,6 +47,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
+                        <div id="showError"></div>
                         <div class="form-group">
                             <label>Tên</label>
                             <input type="text" class="form-control" id="nameInput" />
@@ -61,11 +62,11 @@
                         </div>
                         <div class="form-group">
                             <label>Địa chỉ</label>
-                            <input type="text" class="form-control" id="adressInput" />
+                            <input type="text" class="form-control" id="adressInput" checked="false" />
                         </div>
                         <div class="form-group">
                             <label> thay mật khẩu</label>
-                            <input type="checkbox" id="changePassword">
+                            <input type="checkbox" id="changePassword" />
                             <input type="password" class="form-control" id="passwordInput" disabled="" />
                         </div>
                         <div class="form-group">
@@ -112,7 +113,7 @@
                     $("#passwordInput").val(data.success.password);
                     $("#modalName").text(data.success.name);
                     if (data.success.avatar != null) {
-                        $("#avatar").attr("src", data.success.avatar);
+                        $("#avatar").attr("src", `http://localhost:8000/uploads/images/${data.success.avatar}`);
                     } else {
                         $("#avatar").attr("src", "https://www.bootdey.com/img/Content/avatar/avatar7.png");
                     }
@@ -158,10 +159,60 @@
 
         // sua profile
         $("#editUserProfile").click(function() {
-            var a = $("#changePassword").val();
-            console.log('====================================');
-            console.log(a);
-            console.log('====================================');
+            $("#showError").html("");
+            const name = $("#nameInput").val();
+            const email = $("#emailInput").val();
+            const phone = $("#phoneInput").val();
+            const address = $("#adressInput").val();
+            const id = $("#avatar").attr("data-id");
+            const img = $("#avatar").attr("data-img");
+            var image = '';
+            if (img != '') {
+                image = img
+            }
+            if ($("#changePassword").is(":checked")) {
+                var password = $("#passwordInput").val();
+                var passwordSame = $("#passwordSameInput").val();
+            } else {
+                var password = null;
+                var passwordSame = null;
+            }
+            const data = {
+                name: name,
+                email: email,
+                phone: phone,
+                address: address,
+                password: password,
+                passwordSame: passwordSame,
+                img: image
+            }
+            fetch(`http://localhost:8000/admin/profile/${id}/edit`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    method: 'POST',
+                    body: data ? JSON.stringify(data) : null,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var html = '';
+                    if (data.success) {
+                        alert("sửa thông tin thành công")
+
+                    }
+                    if (data.error) {
+                        html = '<div class="alert alert-danger">'
+                        data.error.forEach(err => {
+                            html += `<p>${err}</p>`
+                        })
+                        html += '</div>';
+                    }
+                    $("#showError").html(html);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     })
 </script>

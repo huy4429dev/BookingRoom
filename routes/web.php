@@ -150,6 +150,7 @@ Route::namespace('Admin')->group(function () {
       Route::get('admin/profile', 'ProfileController@index')->name('adminUser.profile');
       Route::get('admin/profile/{id}', 'ProfileController@getProfile');
       Route::post('admin/profile/upload', 'ProfileController@upload');
+      Route::post('admin/profile/{id}/edit', 'ProfileController@edit');
     });
   });
 });

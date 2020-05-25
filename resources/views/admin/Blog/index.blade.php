@@ -439,7 +439,6 @@
                         html += `<p>${err}</p>`
                     })
                     html += '</div>';
-                    console.log(html);
                 }
                 if (data.success) {
                     $('#modalEditNews').modal('hide');
