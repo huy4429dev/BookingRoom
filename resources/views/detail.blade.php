@@ -163,6 +163,9 @@ function time_elapsed_string($datetime, $full = false)
 			</div>
 			<div class="modal-body">
 				<form>
+					<div class="alert-bookroom alert alert-success">
+						Tôi sẽ liên lạc lại cho bạn sớm nhất
+					</div>
 					<div class="md-form">
 						<input type="text" class="form-control" id="recipient-name" placeholder="Họ tên" name="c_fullname">
 					</div>
@@ -262,6 +265,8 @@ function time_elapsed_string($datetime, $full = false)
 <script>
 
 		let bookRoom = document.querySelector('#bookroom');
+		let alertBookRoom = document.querySelector('.alert-bookroom');
+		alertBookRoom.style.display = 'none';
 
 	function addBookRoom() {
 
@@ -292,7 +297,11 @@ function time_elapsed_string($datetime, $full = false)
 			.then(data => {
 
 				if (data === 'createdCustomerSuccess') {
-					console.log('okk');
+					alertBookRoom.style.display = 'block';
+
+					setTimeout(() => {
+						alertBookRoom.style.display = 'none';
+					},10000)
 					
 				}
 

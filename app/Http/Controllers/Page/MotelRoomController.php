@@ -91,8 +91,9 @@ class MotelRoomController extends Controller
 			'email'    => 'Vui lòng nhập email',
 			'phone'    => 'Vui lòng nhập số điện thoại',
 		 ]);
-   
-   
+			
+		$roomId = Motelroom::findBySlug($slug)->id; 
+		
 		 if ($validator->fails()) {
 			return response()->json(['createdCustomerError' => $validator->errors()->all()], 404);
 		 }
@@ -101,11 +102,20 @@ class MotelRoomController extends Controller
 			'fullname' => $request->fullname,
 			'email'    => $request->email,
 			'phone'    => $request->phone,
-		]);
+			'room_motel_id' => $roomId
+		]); 
 
 		return response()->json('createdCustomerSuccess');
 	}
 
+	public function updateStatus(Request $request, $id)
+	{ 
+		$motelRoom  = Motelroom::find($id);
+		$motelRoom->status = $request->status;
+		$motelRoom->save();
+
+		return response()->json(['updateStatusSuccess' => $motelRoom->status]);
+	}
 
 	// public function userReport($id,Request $request){
 	// 	$ipaddress = '';

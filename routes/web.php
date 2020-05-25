@@ -74,6 +74,7 @@ Route::namespace('Page')->group(function () {
     Route::get('/','MotelRoomController@index');
     Route::get('/{slug}','MotelRoomController@detail');
     Route::post('/{slug}/add-customer','MotelRoomController@addCustomer');
+    Route::put('/update-status/{id}','MotelRoomController@updateStatus');
     
 
   });
@@ -128,7 +129,8 @@ Route::namespace('Admin')->group(function () {
       ===========================================*/
 
     Route::namespace('PostManage')->group(function () {
-      Route::get('/admin/posts', 'PostController@index');
+      Route::get('/admin/room/posts', 'PostController@index');
+      Route::get('/admin/room/posts/show/{id}', 'PostController@show');
     });
 
 
