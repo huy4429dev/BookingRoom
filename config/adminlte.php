@@ -240,7 +240,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Danh sách bài viết',
-                    'url'  => 'admin/room',
+                    'url'  => 'admin/room/posts',
                     'icon' => 'fas fa-paste',
                 ],
             ],

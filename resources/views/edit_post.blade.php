@@ -4,9 +4,19 @@
 <div class="container" style="margin-top: 70px">
     <div class="row">
         <div class="col-md-8">
-            <h2 class="about__heading display-4 my-5 py-3">
-                Cập nhật bài đăng
-            </h2>
+            <div class="d-flex justify-content-between">
+                <h2 class="about__heading display-4 my-5 py-3">
+                    Cập nhật bài đăng
+                </h2> 
+                <div class="d-flex">
+                    @if($post->status == 1 )
+                    <button id="changeStatus" class="btn btn-success my-auto" style="font-size:12px">Đã cho thuê</button>
+                    @else
+                    <button id="changeStatus" class="btn btn-warning my-auto" style="font-size:12px">Chưa được thuê</button>
+                    @endif
+                     
+                </div>
+            </div>
             <hr>
             <div class="panel-heading mb-5">Thông tin khách hàng*</div>
             <table class="table mb-5 show-customer">
@@ -399,5 +409,44 @@
     $('#select-state').selectize({
         maxItems: null
     });
+</script>
+
+<script>
+    let changeStatus = document.querySelector('#changeStatus');
+    let status = <?php echo$post->status ?>;  
+    changeStatus.addEventListener('click', function(){
+        let url = "{{url('room/update-status/'.$post->id)}}";
+
+		fetch(url, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRF-TOKEN': csrfToken
+				},
+				body: JSON.stringify({status: !status})
+			})
+			.then(response => response.json())
+			.then(data => {
+
+				if (data.updateStatusSuccess == false) {
+                        
+                    changeStatus.className = 'btn btn-warning my-auto waves-effect waves-light';
+                    changeStatus.innerHTML = 'Chưa được thuê';
+                    status = 0;
+					
+				}
+                else{
+                    changeStatus.className = 'btn btn-success my-auto waves-effect waves-light';
+                    changeStatus.innerHTML = 'Đã được thuê';
+                    status = 1;
+                }
+
+			
+
+			})
+			.catch(err => {
+				console.log(err);
+			})
+    })
 </script>
 @endsection

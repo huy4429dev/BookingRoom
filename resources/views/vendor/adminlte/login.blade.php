@@ -85,14 +85,6 @@
                 </a>
             </p>
             @endif
-
-            @if ($register_url)
-            <p class="mb-0">
-                <a href="{{ $register_url }}">
-                    {{ __('adminlte::adminlte.register_a_new_membership') }}
-                </a>
-            </p>
-            @endif
             <!-- <a href="{{ url('auth/google') }}" style="margin-top: 20px;" class="btn btn-lg btn-success btn-block">
                 <strong>Login With Google</strong>
             </a>
