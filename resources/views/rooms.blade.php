@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title','blog')
+@section('title','rooms')
 
 @section('content')
 <main class="blog">
     <div class="container">
         <h2 class="about__heading display-4 my-5 py-3">
-            Tin tức
+            Phòng trọ
         </h2>
         <!-- Section: Blog v.3 -->
 <section class="my-5">

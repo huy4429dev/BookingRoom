@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\Categories;
 use App\Models\District;
 use App\Models\Motelroom;
@@ -14,7 +15,7 @@ class HomeController extends Controller
         
         $district = District::all();
         $categories = Categories::all();
-        $hot_motelroom = Motelroom::where('approve', 1)->limit(6)->orderBy('count_view', 'desc')->get();
+        $hot_motelroom = Motelroom::where('approve', 1)->limit(3)->orderBy('count_view', 'desc')->get();
         $map_motelroom = Motelroom::where('approve', 1)->get();
         $listmotelroom = Motelroom::where('approve', 1)->paginate(4);
         
@@ -23,7 +24,8 @@ class HomeController extends Controller
           'categories' => $categories,
           'hot_motelroom' => $hot_motelroom,
           'map_motelroom' => $map_motelroom,
-          'listmotelroom' => $listmotelroom
+          'listmotelroom' => $listmotelroom,
+          'news'          => BlogPost::where('status', 1)->orderBy('id', 'desc')->take(3)->get()
         ]);
     }
 }

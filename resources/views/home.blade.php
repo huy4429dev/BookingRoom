@@ -123,7 +123,7 @@
                                 5000+
                             </h4>
                             <span class="service__title">
-                                Đại lý bán vé
+                                Đại lý bán vé 
                             </span>
                         </div>
                     </div>
@@ -159,36 +159,38 @@
             <?php
             $img_thumb = json_decode($room->images, true);
             ?>
-		<div class="col-md-4 col-sm-6 mb-5">
-			<div class="room-item">
-				<div class="wrap-img mb-4" style=" height:200px; background: lightblue url(uploads/images/<?php echo $img_thumb[0]; ?>) center;     background-size: cover;">
-					<img src="" class="lazyload img-responsive">
-				</div>
-				<div class="room-detail">
-					<h4><a href="room/{{ $room->slug }}">{{ $room->title }}</a></h4>
-					<div class="room-meta">
-						<span><i class="fas fa-user-circle"></i> Người đăng: <a href="/"> {{ $room->user->name }}</a></span>
-						<span class="pull-right"><i class="far fa-clock"></i>
-							<?php
-							// echo time_elapsed_string($room->created_at);
-							?>
-						</span>
-					</div>
-					<div class="room-description"><i class="fas fa-audio-description"></i>
+            <div class="col-md-4 col-sm-6 mb-5">
+                <div class="room-item"> 
+                    <a href="room/{{ $room->slug }}">
+                        <div class="wrap-img mb-4" style=" height:200px; background: lightblue url(uploads/images/<?php echo $img_thumb[0]; ?>) center;     background-size: cover;">
+                            <img src="" class="lazyload img-responsive">
+                        </div>
+                    </a>
+                    <div class="room-detail">
+                        <h4><a href="room/{{ $room->slug }}">{{ $room->title }}</a></h4>
+                        <div class="room-meta">
+                            <span><i class="fas fa-user-circle"></i> Người đăng: <a href="/"> {{ $room->user->name }}</a></span>
+                            <span class="pull-right"><i class="far fa-clock"></i>
+                                <?php
+                                // echo time_elapsed_string($room->created_at);
+                                ?>
+                            </span>
+                        </div>
+                        <div class="room-description"><i class="fas fa-audio-description"></i>
                             {{$room->description}}
+                        </div>
+                        <div class="room-info">
+                            <span><i class="far fa-stop-circle"></i> Diện tích: <b>{{ $room->area }} m<sup>2</sup></b></span>
+                            <span class="pull-right"><i class="fas fa-eye"></i> Lượt xem: <b>{{ $room->count_view }}</b></span>
+                            <div><i class="fas fa-map-marker"></i> Địa chỉ: {{ $room->address }}</div>
+                            <div class="text-primary"><i class="fas fa-dollar-sign mr-2"></i>Giá thuê:
+                                <b>{{ number_format($room->price) }} VNĐ</b></div>
+                        </div>
                     </div>
-					<div class="room-info">
-						<span><i class="far fa-stop-circle"></i> Diện tích: <b>{{ $room->area }} m<sup>2</sup></b></span>
-						<span class="pull-right"><i class="fas fa-eye"></i> Lượt xem: <b>{{ $room->count_view }}</b></span>
-						<div><i class="fas fa-map-marker"></i> Địa chỉ: {{ $room->address }}</div>
-						<div class="text-primary"><i class="fas fa-dollar-sign mr-2"></i>Giá thuê:
-							<b>{{ number_format($room->price) }} VNĐ</b></div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-		@endforeach
+                </div>
+            </div>
+            @endforeach
 
         </div>
     </div>
@@ -202,59 +204,41 @@
             Tin tức
         </h2>
         <div class="row">
-            <div class="col-12 col-md-3">
-                <div class="news__item">
-                    <div class="news__img">
-                        <img class="img-fluid" src="https://place-hold.it/400" alt="">
-                    </div>
-                    <h2 class="news__title">
-                        Lorem ipsum dolor sit amet.
-                    </h2>
-                    <div class="news__description">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, enim.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="news__item">
-                    <div class="news__img">
-                        <img class="img-fluid" src="https://place-hold.it/400" alt="">
-                    </div>
-                    <h2 class="news__title">
-                        Lorem ipsum dolor sit amet.
-                    </h2>
-                    <div class="news__description">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, enim.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="news__item">
-                    <div class="news__img">
-                        <img class="img-fluid" src="https://place-hold.it/400" alt="">
-                    </div>
-                    <h2 class="news__title">
-                        Lorem ipsum dolor sit amet.
-                    </h2>
-                    <div class="news__description">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, enim.
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-3">
-                <div class="news__item">
-                    <div class="news__img">
-                        <img class="img-fluid" src="https://place-hold.it/400" alt="">
-                    </div>
-                    <h2 class="news__title">
-                        Lorem ipsum dolor sit amet.
-                    </h2>
-                    <div class="news__description">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi, enim.
-                    </div>
-                </div>
-            </div>
+            <!-- Section: Blog v.2 -->
+            <section class="text-center">
+               
+                <div class="row">
+                    
+                    @foreach($news as $item)
+                    <!-- Grid column -->
+                    <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
 
+                        <!-- Featured image -->
+                        <div class="view overlay rounded z-depth-2 mb-4">
+                            <img class="img-fluid" src="{{url('/uploads/images/'.$item->thumbnail)}}" alt="Sample image">
+                            <a href="{{url('blog/'.$item->id)}}">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                        <!-- Post title -->
+                        <h4 class="font-weight-bold mb-3"><strong>{{$item->title}}</strong></h4>
+                        <!-- Post data -->
+                        <p>by <a class="font-weight-bold">{{$item->user->name}}</a>, {{Date('d/m/y', strtotime($item->created_at))}}</p>
+                        <!-- Excerpt -->
+                        <p class="dark-grey-text">
+                            {{strlen($item->description) > 150 ? substr($item->description,0,150)."..." : $item->description}}
+                        </p>
+                        <!-- Read more button -->
+                        <a href="{{url('/blog/'.$item->id)}}" class="btn btn-primary btn-rounded btn-md">Read more</a>
+
+                    </div>
+                    @endforeach
+                </div>
+                <!-- Grid row -->
+
+            </section>
+            <!-- Section: Blog v.2 -->
         </div>
     </div>
 </div>
@@ -264,7 +248,8 @@
 @section('css')
 
 <link rel="stylesheet" href="assets/select-2/select2.min.css">
-<link rel="stylesheet" href="assets/toast/toastr.min.css"></link>
+<link rel="stylesheet" href="assets/toast/toastr.min.css">
+</link>
 
 <style>
     #map {
@@ -319,8 +304,6 @@
     button.btn.btn-success {
         padding: 8px;
     }
-
-
 </style>
 
 @endsection
@@ -415,7 +398,7 @@
                     });
                     var infowindow = new google.maps.InfoWindow();
                     (function(phongtro, data) {
-                        
+
                         var content = '<div id="iw-container">' +
                             '<img height="200px" width="300" src="uploads/images/' + data.image + '">' +
                             '<a href="room/' + data.slug + '"><div class="iw-title">' + data.title + '</div></a>' +
@@ -463,7 +446,7 @@
             // $js_array = json_encode($arrmergeLatln);
             // echo "var javascript_array = ". $js_array . ";\n";
 
-            
+
             ?>
         /* ---------------  */
 

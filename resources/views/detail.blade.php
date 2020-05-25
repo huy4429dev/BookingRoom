@@ -141,19 +141,8 @@ function time_elapsed_string($datetime, $full = false)
 				</div>
 				@else
 				<div class="report">
-					<h4>BÁO CÁO</h4>
-					<form action="<?php // route('user.report',['id'=> $motelroom->id]) 
-									?>">
-						<label class="radio" style="margin-right:15px"> Đã cho thuê
-							<input type="radio" checked="checked" name="baocao" value="1">
-							<span class="checkround"></span>
-						</label>
-						<label class="radio"> Sai thông tin
-							<input type="radio" name="baocao" value="2">
-							<span class="checkround"></span>
-						</label>
-						<button class="btn btn-danger">Gửi báo cáo</button>
-					</form>
+					<h4>Trạng thái: {{ $motelroom->status === 1  ?  'Đã cho thuê' : 'Chưa được thuê' }}</h4>
+					<button style="font-size:12px" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Thuê phòng</button>
 				</div>
 				@endif
 				<img src="{{url('images/banner.jpg')}}" width="100%" style="margin-top: 20px">
@@ -161,6 +150,36 @@ function time_elapsed_string($datetime, $full = false)
 		</div>
 	</div>
 
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Nhập thông tin</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="md-form">
+						<input type="text" class="form-control" id="recipient-name" placeholder="Họ tên" name="c_fullname">
+					</div>
+					<div class="md-form">
+						<input type="text" class="form-control" id="recipient-phone" placeholder="Số điện thoại" name="c_phone">
+					</div>
+					<div class="md-form">
+						<input type="email" class="form-control" id="recipient-email" placeholder="Email" name="c_email">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button style="font-size:12px" type="button" class="btn btn-secondary" data-dismiss="modal">Đóng </button>
+				<button style="font-size:12px" type="button" class="btn btn-primary" id="bookroom">Đặt phòng</button>
+			</div>
+		</div>
+	</div>
 </div>
 @endsection
 @section('css')
@@ -240,4 +259,51 @@ function time_elapsed_string($datetime, $full = false)
 	}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzlVX517mZWArHv4Dt3_JVG0aPmbSE5mE&callback=initMap" async defer></script>
+<script>
+
+		let bookRoom = document.querySelector('#bookroom');
+
+	function addBookRoom() {
+
+		let url = "{{url('room/'.$motelroom->slug.'/add-customer')}}";
+		
+		let fullname = document.querySelector('input[name="c_fullname"]').value;
+		let email = document.querySelector('input[name="c_email"]').value;
+		let phone = document.querySelector('input[name="c_phone"]').value;
+
+		let data = {
+
+			email: email,
+			phone: phone,
+			fullname: fullname,
+
+		};
+
+
+		fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRF-TOKEN': csrfToken
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => response.json())
+			.then(data => {
+
+				if (data === 'createdCustomerSuccess') {
+					console.log('okk');
+					
+				}
+
+			
+
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
+
+	bookRoom.addEventListener('click',addBookRoom);
+</script>
 @endsection
