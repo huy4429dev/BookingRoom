@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-between">
     <h1>Danh sách nhân viên</h1>
     <!-- Button trigger modal add news -->
-    <a href="admin-room/create"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddNews">
+    <a href="staff/create"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddNews">
             <i class="fas fa-plus"></i>
         </button>
     </a>

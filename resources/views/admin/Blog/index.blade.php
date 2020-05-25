@@ -264,12 +264,10 @@
                     cell5.innerHTML = data.success.description;
                     cell6.innerHTML = `<button class="btn btn-warning form-group editNews" data-id="${data.success.id}"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-danger form-group deleteNews" data-id="${data.success.id}"><i class="far fa-trash-alt"></i></button>`;
-                    resertInput();
                 }
                 document.querySelector("#formResult").innerHTML = html;
             })
             .catch((error) => {
-                resertInput();
                 console.log('loi', error);
             });
     });
@@ -385,6 +383,7 @@
         formData.append('thumbnail', thumbnailEdit.files[0]);
         fetch(`http://localhost:8000/admin/blogs/upload-edit/${thumbnailId}`, {
                 headers: {
+                    
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 method: 'POST',

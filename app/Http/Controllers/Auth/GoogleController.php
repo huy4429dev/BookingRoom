@@ -41,14 +41,13 @@ class GoogleController extends Controller
      
             }else{
 
-                $user = User::where('email',$user->email)->first();
-                if($user != null) {
+                // $user = User::where('email',$user->email)->first();
+                // if($user != null) {
 
-                    Auth::login($user);
-                    return redirect('/');
+                //     Auth::login($user);
+                //     return redirect('/');
 
-                }
-
+                // }
                 $newUser = User::create([
                     'name'      => $user->name,
                     'email'     => $user->email,

@@ -20,7 +20,7 @@ class masterController extends Controller
         $adminUser = DB::table('Users')
             ->select('*')
             ->join('model_has_roles', 'model_has_roles.model_id', '=', 'Users.id')
-            ->where('role_id', 3)
+            ->where('role_id', 1)
             ->get();
         return view('admin.UserManager.MasterRoom.index', compact('adminUser'));
     }

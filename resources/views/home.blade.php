@@ -209,7 +209,7 @@
                
                 <div class="row">
                     
-                    @foreach($news as $item)
+                   @foreach($news as $item)
                     <!-- Grid column -->
                     <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
 

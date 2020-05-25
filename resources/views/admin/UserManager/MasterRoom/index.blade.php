@@ -38,8 +38,8 @@
                             <tr>
                                 <th>Tên</th>
                                 <th>email</th>
-                                <th>Địa chỉ</th>
                                 <th>Điện thoại</th>
+                                <th>Địa chỉ</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>

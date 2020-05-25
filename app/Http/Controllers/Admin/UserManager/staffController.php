@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\UserManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class staffController extends Controller
 {
@@ -32,7 +32,7 @@ class staffController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.UserManager.StaffRoom.create");
     }
 
     /**
@@ -43,7 +43,30 @@ class staffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->Validate($request,[
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+            'password' => 'required'
+        ], [
+            'name.required' => 'tên không được trống',
+            'email.required' => 'email không được trống',
+            'email.email' => 'email không đúng định dạng',
+            'phone.required' => 'điện thoại không được trống',
+            'address.required' => 'địa chỉ không được trống',
+            'password.required' => 'mật khẩu không được trống',
+         
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = bcrypt($request->password);
+        $user->email =  $request->email;
+        $user->save();
+        $user->assignRole(['staff']);
+       return redirect('admin/user/staff');
     }
 
     /**

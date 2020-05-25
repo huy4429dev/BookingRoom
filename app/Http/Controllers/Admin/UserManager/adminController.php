@@ -19,7 +19,7 @@ class adminController extends Controller
         $adminUser = DB::table('Users')
             ->select('*')
             ->join('model_has_roles', 'model_has_roles.model_id', '=', 'Users.id')
-            ->where('role_id', 1)
+            ->where('role_id', 3)
             ->get();
         return view('admin.UserManager.AdminRoom.index', compact('adminUser'));
     }

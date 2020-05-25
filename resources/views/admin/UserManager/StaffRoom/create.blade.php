@@ -5,39 +5,46 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>Thêm bài viết</h1>
+<h1>Thêm nhân viên</h1>
 @stop
 
 @section('content')
 
-<!-- <form method="POST" id="formAddNews"> -->
+<div>
+@if ($errors->any())
+     @foreach ($errors->all() as $error)
+         <div class="alert alert-danger">{{$error}}</div>
+     @endforeach
+ @endif
+<form method="Post" action="{{ route('staff.store')}}">
 @csrf
 <div class="form-group">
-    <label for="title">Tiêu đề</label>
-    <input type="text" class="form-control" id="title" name="title">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    <p class="text-danger title"></p>
+    <label for="name">tên</label>
+    <input type="text" class="form-control"  name="name" />
 </div>
 
 <div class="form-group">
-    <label for="description">Đoạn trích</label>
-    <textarea class="form-control" id="description" rows="3" name="description"></textarea>
-    <p class="text-danger description"></p>
+    <label for="email">Email</label>
+    <input class="form-control" type="text" name="email" />
 </div>
 
 <div class="form-group">
-    <label for="thumbnail">Ảnh đại diện</label>
-    <input class="form-group" type="file" name="thumbnail" id="thumbnail">
-    <img src="" id="thumbnailUrl"  style="display:none; width:100px ; height : 100px"/>
-</div>
-
-<div class="form-group">
-    <label for="content">Nội dung</label>
-    <textarea name="content" id="content" value=""></textarea>
+    <label for="address">địa chỉ</label>
+    <input class="form-control" type="text" name="address" />
     <p class="text-danger content_error"></p>
 </div>
-<button class="btn btn-primary" id="btnAddNews">Lưu</button>
-<!-- </form> -->
+<div class="form-group">
+    <label for="phone">điện thoại</label>
+    <input class="form-control" type="text" name="phone"/>
+</div>
+<div class="form-group">
+    <label for="phone">mật khẩu</label>
+    <input class="form-control" type="password" name="password"/>
+</div>
+<button class="btn btn-primary" type="submit">add</button>
+</form>
+</div>
+
 
 @stop
 
