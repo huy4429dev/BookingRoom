@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Motelroom::findOrFail($id);
+        $post = Motelroom::where('id',$id)->with('user')->first();
         return response()->json(["success" => $post]);
     }
 
@@ -85,6 +85,13 @@ class PostController extends Controller
         }
         $post->delete();
         return response()->json(["success" => $post]);
+    }
+
+    public function update(Request $request){
+        $motelRoom = Motelroom::find($request->id);
+        $motelRoom->approve = 1;
+        $motelRoom->save();
+        return redirect()->back();
     }
 
 }

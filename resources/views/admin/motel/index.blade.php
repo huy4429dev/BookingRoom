@@ -140,7 +140,7 @@
     <div class="modal-dialog modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add news</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Chi tiết</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -149,28 +149,57 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="title">Tiêu đề</label>
-                    <input type="text" class="form-control" id="titleEdit" name="titleEdit" disabled>
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="title">Tài khoản</label>
+                    <input type="text" class="form-control" id="emailEdit" name="email" disabled>
                     <p class="text-danger title"></p>
                 </div>
-
+                <div class="form-group">
+                    <label for="title">Tiêu đề</label>
+                    <input type="text" class="form-control" id="titleEdit" name="titleEdit" disabled>
+                    <p class="text-danger title"></p>
+                </div>
                 <div class="form-group">
                     <label for="description">Mô tả</label>
                     <textarea class="form-control" id="descriptionEdit" rows="3" name="descriptionEdit" disabled></textarea>
                     <p class="text-danger description"></p>
                 </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" value="1" name="statusCheckEdit" >Phê duyệt
-                    </label>
+                <div class="form-group">
+                    <label for="description">Địa chỉ</label>
+                    <textarea class="form-control" id="addressEdit" rows="3" name="addressEdit" disabled></textarea>
+                    <p class="text-danger description"></p>
                 </div>
-               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">ĐÓng</button>
-                <button type="button" class="btn btn-primary" id="btnEditNews" data-id="" data-row="">Đồng ý</button>
-            </div>
+                <div class="form-group">
+                    <label for="title">Diện tích (m2)</label>
+                    <input type="text" class="form-control" id="areaEdit" name="areaEdit" disabled>
+                    <p class="text-danger title"></p>
+                </div>
+                <div class="form-group">
+                    <label for="title">Giá (vnđ)</label>
+                    <input type="text" class="form-control" id="priceEdit" name="priceEdit" disabled>
+                    <p class="text-danger title"></p>
+                </div>
+                <div class="form-group">
+                    <label for="title">Điện thoại</label>
+                    <input type="text" class="form-control" id="phoneEdit" name="phoneEdit" disabled>
+                    <p class="text-danger title"></p>
+                </div>
+                
+                <form id="updateStatus" method="POST">
+                    @csrf
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" value="1" name="statusCheckEdit" id="statusCheckEdit" >Phê duyệt
+                        </label>
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <input type="hidden" name="id" id="motelId">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ĐÓng</button>
+                        <button type="button" class="btn btn-primary" id="btnEditNews" data-id="" data-row="">Đồng ý</button>
+                    </div>
+                   </div>
+
+                </form>
         </div>
     </div>
 </div>
@@ -186,8 +215,6 @@
         document.querySelector("#formResult").innerHTML = "";
         document.getElementById("title").value = "";
         document.getElementById('description').value = "";
-        document.getElementById('thumbnailUrl').setAttribute(data - img, "");
-        CKEDITOR.instances.content1.setData("");
         document.querySelector("#formResult").innerHTML = "";
     }
 
@@ -241,12 +268,16 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        console.log(data.success);
                         document.querySelector("#btnEditNews").setAttribute("data-id", data.success.id);
                         document.querySelector("#titleEdit").value = data.success.title;
+                        document.querySelector("#emailEdit").value = data.success.user.email;
                         document.querySelector("#descriptionEdit").value = data.success.description;
-                        CKEDITOR.instances.content1.setData(data.success.content);
-                        document.querySelector("#thumbnailEdit").setAttribute("data-id", `${data.success.id}`);
-                        document.querySelector('#thumbnailUrl1').src = `http://localhost:8000/uploads/images/${data.success.thumbnail}`;
+                        document.querySelector("#addressEdit").value = data.success.address;
+                        document.querySelector("#areaEdit").value = data.success.area;
+                        document.querySelector("#priceEdit").value = data.success.price;
+                        document.querySelector("#phoneEdit").value = data.success.phone;
+                        document.querySelector("#motelId").value = data.success.id;
                     }
                     if (data.error) {
                         alert("error");
@@ -264,65 +295,12 @@
     actEditNews.addEventListener('click', () => {
         const titleEdit = document.querySelector("#titleEdit").value;
         const descriptionEdit = document.querySelector("#descriptionEdit").value;
-        const content1 = CKEDITOR.instances.content1.getData();
         const id = actEditNews.getAttribute("data-id");
         var rowEdit = actEditNews.getAttribute('data-row');
-        const status = document.querySelector('input[name="statusCheckEdit"]:checked').value;
-        const data = {
-            title: titleEdit,
-            content: content1,
-            description: descriptionEdit,
-            status: status
-        };
-        
-        fetch(`http://localhost:8000/admin/room/posts/update/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                body: data ? JSON.stringify(data) : null,
-            })
-            .then(response => response.json())
-            .then(data => {
-                var html = '';
-                if (data.error) {
-                    html = '<div class="alert alert-danger">'
-                    data.error.forEach(err => {
-                        html += `<p>${err}</p>`
-                    })
-                    html += '</div>';
-                }
-                if (data.success) {
-                    $('#modalEditNews').modal('hide');
-                    alert('sửa tin tức thành công');
-                    var rowTable = document.createElement('tr');
-                    var tableBody = document.querySelector('#myTable tbody');
-                    tableBody.deleteRow(row);
-                    var row = tableBody.insertRow(row);
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
-                    var cell5 = row.insertCell(4);
-                    var cell6 = row.insertCell(5);
-                    cell1.innerHTML = rowEdit;
-                    cell2.innerHTML = data.success.title;
-                    cell3.innerHTML = data.success.created_at;
-                    if (data.success.status == 1) {
-                        cell4.innerHTML = "<span class ='badge badge-info'> không hiện trang chủ </span>";
-                    } else {
-                        cell4.innerHTML = "<span class = 'badge badge-success'>hiện trang chủ </span>";
-                    }
-                    cell5.innerHTML = data.success.description;
-                    cell6.innerHTML = `<button class="btn btn-warning form-group editNews" data-id="${data.success.id}"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-danger form-group deleteNews" data-id="${data.success.id}"><i class="far fa-trash-alt"></i></button>`;
-                }
-                document.querySelector("#formResult1").innerHTML = html;
-            })
-            .catch((error) => {
-                console.log('eo dc', error);
-            });
+        var form  = document.querySelector('#updateStatus');
+        var formId = document.querySelector('#motelId');
+        form.setAttribute('action',"/admin/room/posts/update/" + formId.value);
+        form.submit();
     })
 </script>
 @stop

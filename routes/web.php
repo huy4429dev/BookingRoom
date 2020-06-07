@@ -131,6 +131,7 @@ Route::namespace('Admin')->group(function () {
     Route::namespace('PostManage')->group(function () {
       Route::get('/admin/room/posts', 'PostController@index');
       Route::get('/admin/room/posts/show/{id}', 'PostController@show');
+      Route::post('/admin/room/posts/update/{id}', 'PostController@update');
     });
 
 
