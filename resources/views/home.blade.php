@@ -363,18 +363,19 @@
             min_price: min,
             max_price: max,
             id_ditrict: id_ditrict,
-            id_category: id_category
+            id_category: id_category 
         }
         console.log(min, max);
-        // console.log(data);
+        // console.log(data); 
         $.ajax({
             url: "search-motel",
             method: "POST",
             data: data_send,
             success: function(result) {
                 var result_room = JSON.parse(result);
-                if (result_room.length != 0)
-                    toastr.success('Tìm thấy ' + result_room.length + ' kết quả');
+                if (result_room.length != 0) 
+                
+                    toastr.success('Tìm thấy ' + result_room.length + ' kết quả'); 
                 else
                     toastr.warning('Không tìm thấy kết quả nào');
                 map = new google.maps.Map(document.getElementById('map'), {
@@ -393,8 +394,8 @@
                         position: latlng,
                         map: map,
                         title: data.title,
-                        icon: "images/gps.png",
-                        content: 'dgfdgfdg'
+                        icon: "images/gps.png", 
+                        content: 'dgfdgfdg' 
                     });
                     var infowindow = new google.maps.InfoWindow();
                     (function(phongtro, data) {
@@ -432,7 +433,7 @@
             zoom: 15,
             draggable: true
         });
-        /* Get latlng list phòng trọ */
+        /* Get latlng list phòng trọ */ 
 
         // <?php
             // $arrmergeLatln = array();
