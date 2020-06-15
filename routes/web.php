@@ -39,30 +39,28 @@ Route::namespace('Page')->group(function () {
   Route::post('/search-motel', 'MotelRoomController@SearchMotelAjax');
 
 
-/*===========================================
+  /*===========================================
       User
   ===========================================*/
 
 
   Route::group(['prefix' => 'user'], function () {
-    
-      Route::post('contact', 'ContactController@create');
-    
-      Route::post('login', 'UserController@login')->name('user.login');
-    
-      Route::post('register', 'UserController@register')->name('user.register');
 
+    Route::post('contact', 'ContactController@create');
+
+    Route::post('login', 'UserController@login')->name('user.login');
+
+    Route::post('register', 'UserController@register')->name('user.register');
   });
 
-/*===========================================
+  /*===========================================
       Blog
   ===========================================*/
 
   Route::group(['prefix' => 'blog'], function () {
 
-     Route::get('/', 'BlogController@index');
-     Route::get('/{id}', 'BlogController@detail'); 
-
+    Route::get('/', 'BlogController@index');
+    Route::get('/{id}', 'BlogController@detail');
   });
 
   /*===========================================
@@ -71,15 +69,13 @@ Route::namespace('Page')->group(function () {
 
   Route::group(['prefix' => 'room'], function () {
 
-    Route::get('/','MotelRoomController@index');
-    Route::get('/{slug}','MotelRoomController@detail');
-    Route::post('/{slug}/add-customer','MotelRoomController@addCustomer');
-    Route::put('/update-status/{id}','MotelRoomController@updateStatus');
-    
-
+    Route::get('/', 'MotelRoomController@index');
+    Route::get('/{slug}', 'MotelRoomController@detail');
+    Route::post('/{slug}/add-customer', 'MotelRoomController@addCustomer');
+    Route::put('/update-status/{id}', 'MotelRoomController@updateStatus');
   });
-  
-  
+
+
 
   Route::group(['middleware' => ['role:room master']], function () {
 
@@ -132,8 +128,18 @@ Route::namespace('Admin')->group(function () {
       Route::get('/admin/room/posts', 'PostController@index');
       Route::get('/admin/room/posts/show/{id}', 'PostController@show');
       Route::post('/admin/room/posts/update/{id}', 'PostController@update');
+      
     });
 
+
+    /*===========================================
+      Admin Order manage
+      ===========================================*/
+      Route::namespace('OrderManage')->group(function () {
+        Route::get('/admin/order', 'OrderController@index');
+        Route::get('/admin/order/group', 'OrderController@group');
+        Route::post('/admin/order/group', 'OrderController@groupPost')->name('admin.order.group.post');
+      });
 
 
     /*===========================================

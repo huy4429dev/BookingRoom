@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'BookRoom',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -47,7 +47,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Room</b>Book',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -169,7 +169,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'admin/dashboard',
+    'dashboard_url' => '/home',
 
     'logout_url' => 'logout',
 
@@ -221,9 +221,8 @@ return [
         ],
         [
             'text'        => 'Dashboard',
-            'url'         => 'admin/dashboard',
+            'url'         => '/home',
             'icon'        => 'fas fa-home',
-            'label'       => 4,
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
@@ -272,13 +271,13 @@ return [
             'icon'    => 'fas fa-money-check-alt',
             'submenu' => [
                 [
-                    'text' => 'Danh sách đơn hàng',
-                    'url'  => '#',
+                    'text' => 'Lịch sử phê duyệt',
+                    'url'  => '/admin/order',
                     'icon' => 'fas fa-paste',
                 ],
                 [
                     'text'    => 'Doanh thu',
-                    'url'     => '#',
+                    'url'     => '/admin/order/group',
                     'icon' => 'fas fa-paste',
                 ],
             ],

@@ -188,7 +188,7 @@
                     @csrf
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" value="1" name="statusCheckEdit" id="statusCheckEdit" >Phê duyệt
+                            <input type="checkbox" class="form-check-input" value="1" name="statusCheckEdit" id="statusCheckEdit" >Phê duyệt
                         </label>
                     </div>
                     
@@ -278,6 +278,11 @@
                         document.querySelector("#priceEdit").value = data.success.price;
                         document.querySelector("#phoneEdit").value = data.success.phone;
                         document.querySelector("#motelId").value = data.success.id;
+                        if(data.success.approve == 1){
+                            document.querySelector("#statusCheckEdit").checked = true;
+                        };
+                      
+                    
                     }
                     if (data.error) {
                         alert("error");
