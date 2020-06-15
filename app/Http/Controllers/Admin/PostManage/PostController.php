@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\PostManage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Motelroom;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -17,7 +19,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Motelroom::findOrFail($id);
+        $post = Motelroom::where('id',$id)->with('user')->first();
         return response()->json(["success" => $post]);
     }
 
@@ -80,11 +82,31 @@ class PostController extends Controller
     public function delete($id)
     {
         $post = BlogPost::findOrFail($id);
-        if ($post->thumbnail > 0) {
+    if ($post->thumbnail > 0) {
             unlink("uploads/images/" . $post->thumbnail);
         }
         $post->delete();
         return response()->json(["success" => $post]);
+    }
+
+    public function update(Request $request){
+        $motelRoom = Motelroom::find($request->id);
+        $motelRoom->approve = $request->statusCheckEdit  ?? 0;
+        $motelRoom->save();
+        if($request->statusCheckEdit != 0){
+            Order::create([
+                'user_id' =>  Auth::user()->id,
+                'motel_id' =>  $motelRoom->id,
+                'total' =>  400,
+            ]);
+        }
+        else{
+            $order = Order::where('motel_id', $motelRoom->id)->first();
+            $order->delete();
+        }
+        
+
+        return redirect()->back();
     }
 
 }
