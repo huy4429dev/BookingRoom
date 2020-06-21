@@ -60,17 +60,17 @@
         <div class="row">
             <div class="col-12 col-md-4">
                 <div class="banner__item">
-                    <img class="img-fluid" src="./assets/images/banner-home-(1).png" alt="" class="banner__item-img">
+                    <img class="img-fluid" src="./assets/images/a.png" alt="" class="banner__item-img">
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <div class="banner__item">
-                    <img class="img-fluid" src="./assets/images/banner-home.png" alt="" class="banner__item-img">
+                    <img class="img-fluid" src="./assets/images/bb.png" alt="" class="banner__item-img">
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <div class="banner__item">
-                    <img class="img-fluid" src="./assets/images/banner-trang-chu-ok.png" alt="" class="banner__item-img">
+                    <img class="img-fluid" src="./assets/images/c.png" alt="" class="banner__item-img">
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@
                                 5000+
                             </h4>
                             <span class="service__title">
-                                Tuyến đường
+                                Hiện đại
                             </span>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                 2000+
                             </h4>
                             <span class="service__title">
-                                Nhà xe
+                                Phòng trọ
                             </span>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                                 5000+
                             </h4>
                             <span class="service__title">
-                                Đại lý bán vé 
+                                Vị trí đẹp 
                             </span>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                                 400+
                             </h4>
                             <span class="service__title">
-                                Bến xe
+                                Tiện nghi
                             </span>
                         </div>
                     </div>
@@ -392,10 +392,10 @@
             min_price: min,
             max_price: max,
             id_ditrict: id_ditrict,
-            id_category: id_category
+            id_category: id_category 
         }
         console.log(min, max);
-        // console.log(data);
+        // console.log(data); 
         $.ajax({
             url: "search-motel",
             method: "POST",
@@ -451,8 +451,8 @@
                         position: latlng,
                         map: map,
                         title: data.title,
-                        icon: "images/gps.png",
-                        content: 'dgfdgfdg'
+                        icon: "images/gps.png", 
+                        content: 'dgfdgfdg' 
                     });
                     var infowindow = new google.maps.InfoWindow();
                     (function(phongtro, data) {
@@ -490,7 +490,7 @@
             zoom: 15,
             draggable: true
         });
-        /* Get latlng list phòng trọ */
+        /* Get latlng list phòng trọ */ 
 
         // <?php
             // $arrmergeLatln = array();

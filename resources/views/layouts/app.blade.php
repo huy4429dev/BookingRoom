@@ -208,70 +208,66 @@
                         </h4>
                         <ul class="footer__category-news">
                             <li class="footer__news-item">
-                                <a href="#" class="footer__news-link">Xe giường nằm Limousine – đỉnh cao mới của ngành
-                                    xe khách</a>
+                                <a href="#" class="footer__news-link">Nhà trọ hiện đại và thông minh nhất</a>
                             </li>
                             <li class="footer__news-item">
-                                <a href="#" class="footer__news-link">Xe limousine đi Vũng Tàu: Tổng hợp top 6 xe chất
-                                    lượng cao</a>
+                                <a href="#" class="footer__news-link">Thuê phòng trọ tại Hưng Dũng</a>
                             </li>
                             <li class="footer__news-item">
-                                <a href="#" class="footer__news-link">Review xe limousine đi Đà Lạt: những câu hỏi
-                                    thường gặp</a>
+                                <a href="#" class="footer__news-link">Thuê phòng trọ tại Bến Thủy</a>
                             </li>
                             <li class="footer__news-item">
-                                <a href="#" class="footer__news-link">Xe limousine đi Sapa: Tổng hợp top các hãng xe
-                                    chất lượng cao</a>
+                                <a href="#" class="footer__news-link">Thuê phòng trọ tại Lê Mao</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-6 col-md-3">
                         <h4 class="footer__category-heading">
-                            Tuyến đường
+                            Nhà trọ đẹp
                         </h4>
                         <ul class="footer__category-street">
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Phòng ốc giá rẻ</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Phòng ốc tiện nghi</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Điện nước giá cả hợp lý</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Webite tìm kiếm và cho thuê hàng đầu</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Phòng trọ thông minh</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Phòng trọ thông minh</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Sài Gòn đi Buôn Ma Thuột</a>
+                                <a href="" class="footer__street-link">Phòng trọ thông minh</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-6 col-md-3">
                         <h4 class="footer__category-heading">
-                            Xe Limousine
+                            Hình thức
                         </h4>
                         <ul class="footer__category-street">
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Limousine Buôn Ma Thuột Đà Lạt</a>
+                                <a href="" class="footer__street-link">Ở đơn</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Limousine Buôn Ma Thuột Đà Lạt</a>
+                                <a href="" class="footer__street-link">Ở ghép</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Limousine Buôn Ma Thuột Đà Lạt</a>
+                                <a href="" class="footer__street-link">Thuê nhà</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Limousine Buôn Ma Thuột Đà Lạt</a>
+                                <a href="" class="footer__street-link">Biệt thự</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Limousine Buôn Ma Thuột Đà Lạt</a>
+                                <a href="" class="footer__street-link">Trọ giá tốt nhất</a>
                             </li>
 
                         </ul>
@@ -312,7 +308,7 @@
                                 <a href="" class="footer__street-link">Hướng dẫn thanh toán</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">Quy chế vé xe</a>
+                                <a href="" class="footer__street-link">Quy chế nhà trọ</a>
                             </li>
                             <li class="footer__street-item">
                                 <a href="" class="footer__street-link">Câu hỏi thường gặp</a>
@@ -343,7 +339,7 @@
                                 <a href="" class="footer__street-link">09432433</a>
                             </li>
                             <li class="footer__street-item">
-                                <a href="" class="footer__street-link">vexer@gmail.com.vn</a>
+                                <a href="" class="footer__street-link">linh@gmail.com.vn</a>
                             </li>
 
                         </ul>
@@ -353,18 +349,18 @@
     </footer>
     <!-- COPYRIGHT  -->
     <div class="copy-right text-center">
-        <h4 class="copy-right__heading">Công ty cổ phần Vexere</h4>
+        <h4 class="copy-right__heading">Công ty cổ phần linh phan</h4>
         <p class="copy-right__desc">
-            Địa chỉ đăng ký kinh doanh: 8C Chữ Đồng Tử, Phường 7, Quận Tân Bình, Thành Phố Hồ Chí Minh, Việt Nam
+            Địa chỉ đăng ký kinh doanh: 69, Phường 7, Trường Thi, Thành Phố Vinh, Việt Nam
         </p>
         <p class="copy-right__desc">
-            Địa chỉ: Lầu 8,9, Tòa nhà CirCO, 222 Điện Biên Phủ, Quận 3, TP. Hồ Chí Minh, Việt Nam
+            Địa chỉ: Lầu 8,9, Tòa nhà CirCO, 222 Điện Biên Phủ, Lê Mao, TP. Vinh, Việt Nam
         </p>
         <p class="copy-right__desc">
-            Giấy chứng nhận ĐKKD số 0312387105 do Sở KH và ĐT TP. Hồ Chí Minh cấp lần đầu ngày 25/7/2013
+            Giấy chứng nhận ĐKKD số 0312387105 do Sở KH và ĐT TP. Vinh cấp lần đầu ngày 25/7/2013
         </p>
         <p class="copy-right__desc">
-            Bản quyền © 2019 thuộc về VeXeRe.Com
+            Bản quyền © 2020 thuộc về Linh Phan
         </p>
     </div>
     <script src="{{url('/assets/js/jquery-3.5.1.min.js')}}"></script>
