@@ -51,8 +51,9 @@ function time_elapsed_string($datetime, $full = false)
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<ul class="breadcrumb">
+				<ul class="breadcrumb d-flex justify-content-between">
 					<li class="active">{{ $motelroom->title }}</li>
+					<div class="fb-like" data-href="http://localhost:8000/room/test-ben-thuy" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
 				</ul>
 			</div>
 		</div>
@@ -148,6 +149,7 @@ function time_elapsed_string($datetime, $full = false)
 				<img src="{{url('images/banner.jpg')}}" width="100%" style="margin-top: 20px">
 			</div>
 		</div>
+		<div class="fb-comments" data-href='{{url("/room/$motelroom->slug")}}' data-numposts="5" data-width=""></div>
 	</div>
 
 </div>
@@ -184,6 +186,7 @@ function time_elapsed_string($datetime, $full = false)
 		</div>
 	</div>
 </div>
+<div id="fb-root"></div>
 @endsection
 @section('css')
 <style>
@@ -315,4 +318,6 @@ function time_elapsed_string($datetime, $full = false)
 
 	bookRoom.addEventListener('click',addBookRoom);
 </script>
+
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=543121906576699&autoLogAppEvents=1" nonce="qkAMJmgU"></script>
 @endsection

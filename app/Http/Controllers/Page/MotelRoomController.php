@@ -26,6 +26,8 @@ class MotelRoomController extends Controller
 		$room->count_view = $room->count_view + 1;
 		$room->save();
 		$categories = Categories::all();
+
+
 		return view('detail',
 		 [
 			'motelroom'  => $room,
@@ -102,6 +104,7 @@ class MotelRoomController extends Controller
 			'fullname' => $request->fullname,
 			'email'    => $request->email,
 			'phone'    => $request->phone,
+			'watched'  => false,
 			'room_motel_id' => $roomId
 		]); 
 

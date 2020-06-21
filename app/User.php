@@ -50,4 +50,9 @@ class User extends Authenticatable
 
         return $check;
     }
+
+    public function rooms()
+    {
+        return $this->hasMany('App\Models\Motelroom','user_id');
+    }
 }

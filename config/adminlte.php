@@ -208,6 +208,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#611-menu
     |
     */
+
     'menu' => [
         [
             'text' => 'search',

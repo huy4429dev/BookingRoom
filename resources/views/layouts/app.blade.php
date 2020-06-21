@@ -25,9 +25,6 @@
         .md-form input {
             font-size: 16px;
         }
-
-  
-
     </style>
     @yield('css')
 </head>
@@ -54,7 +51,7 @@
                 <li class="nav__item"><a href="{{url('/contact')}}" class="nav__link">Liên hệ</a></li>
                 <li class="nav__item"><a href="{{url('/user/post')}}" class="nav__link">Đăng tin <i class="far fa-edit"></i></a></li>
                 @if(!is_null(Auth::user()))
-                <li class="nav__item">
+                <li class="nav__item" style="position:relative">
                     <div class="dropdown">
                         <!--Trigger-->
                         <a class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tài khoản</a>
@@ -66,6 +63,21 @@
                                 <button style="border:none; font-size:14px; background:none; padding:0" type="submit">Đăng xuất</button>
                             </form>
                         </div>
+                    </div>
+                    <div class="dropdown">
+
+                        <!--Trigger-->
+                        @if($countAlert > 0)
+                        <span class="badge badge-pill badge-danger" style="position: absolute;right:-30px; bottom:2px;cursor:pointer" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            {{$countAlert}}
+                        </span>
+                        <div class="dropdown-menu dropdown-primary">
+                            @foreach($messageAlert as $item)
+                                <a style="font-size:14px;padding: 10px;" class="dropdown-item" href="{{url($item['link'])}}">{{$item['alert']}}</a>
+                            @endforeach
+
+                        </div>
+                        @endif
                     </div>
                 </li>
                 @else

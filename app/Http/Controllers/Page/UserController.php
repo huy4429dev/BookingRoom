@@ -174,6 +174,12 @@ class UserController extends Controller
          $post = $post->where('user_id', Auth::user()->id)->where('slug',$slug)->first();
          $district = District::all();
          $categories = Categories::all();
+
+         foreach($post->roomguest as $item){
+            $item->watched = true;
+            $item->save();
+         }
+
          return view('edit_post', [
             'district' => $district,
             'categories' => $categories,

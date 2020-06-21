@@ -38,7 +38,7 @@
                     </select>
                 </div>
                 <div class="col-xs-6">
-                    <button class="btn btn-success" onclick="searchMotelajax()">Tìm kiếm ngay</button>
+                    <button class="btn btn-success" onclick="searchMotelajax()" style="font-size: 10px; margin:0">Tìm kiếm ngay</button>
                 </div>
             </div>
 
@@ -230,7 +230,7 @@
                             {{strlen($item->description) > 150 ? substr($item->description,0,150)."..." : $item->description}}
                         </p>
                         <!-- Read more button -->
-                        <a href="{{url('/blog/'.$item->id)}}" class="btn btn-primary btn-rounded btn-md">Read more</a>
+                        <a href="{{url('/blog/'.$item->id)}}" class="btn btn-primary" style="font-size:11px">Read more</a>
 
                     </div>
                     @endforeach
@@ -242,7 +242,36 @@
         </div>
     </div>
 </div>
+<div id="show-result" class="modal fade right show" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-gtm-vis-first-on-screen-2340190_1302="190310" data-gtm-vis-total-visible-time-2340190_1302="100" data-gtm-vis-has-fired-2340190_1302="1" style="display: none; padding-right: 16px;" aria-modal="true">
+      <div class="modal-dialog modal-full-height modal-right" role="document">
+        <!--Content-->
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header">
+            <h4 class="modal-title w-100" id="countResult" style="font-size:20px">Kết quả tìm kiếm </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span id="close-result" style="font-size: 25px;">×</span>
+            </button>
+          </div>
+          <!--Body-->
+          <div class="modal-body">
+       
 
+            <ul class="list-group z-depth-0" id="list-result">
+              <li class="list-group-item justify-content-between">
+                Cras justo odio
+                <span class="badge badge-primary badge-pill">14</span>
+              </li>
+
+            </ul>
+
+          </div>
+          <!--Footer-->
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+    <div id="backdrop" ></div>
 @endsection
 
 @section('css')
@@ -343,9 +372,9 @@
             "preventDuplicates": false,
             "onclick": null,
             "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
+            "hideDuration": "0",
+            "timeOut": "0",
+            "extendedTimeOut": "0",
             "showEasing": "swing",
             "hideEasing": "linear",
             "showMethod": "fadeIn",
@@ -374,7 +403,36 @@
             success: function(result) {
                 var result_room = JSON.parse(result);
                 if (result_room.length != 0)
-                    toastr.success('Tìm thấy ' + result_room.length + ' kết quả');
+                    {
+                        console.log(result_room);
+                        
+                    toastr.success('Tìm thấy ' + result_room.length + ' kết quả',
+                    '',
+                    {onclick: function() {
+                        $('#show-result').css('display','block');
+                        $('#backdrop').addClass('modal-backdrop fade show')
+                        $('#close-result').on('click', function(){
+                            $('#show-result').css('display','none');
+                            $('#backdrop').removeClass('modal-backdrop fade show')
+                        })
+                        $('#backdrop').on('click', function(){
+                            
+                            $('#show-result').css('display','none');
+                            $('#backdrop').removeClass('modal-backdrop fade show')
+                        })
+                        $('#countResult').html('Kết quả tìm kiếm (' + result_room.length + ')');
+                        let result = '';
+                        result_room.forEach(item => {
+                            result += `<li> <a href="{{url('/room/${item.slug}')}}">${item.title}</a></li>`;
+                        });
+
+                        $('#list-result').html(result);
+
+                    }}
+                    );
+
+                    }
+
                 else
                     toastr.warning('Không tìm thấy kết quả nào');
                 map = new google.maps.Map(document.getElementById('map'), {

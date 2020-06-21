@@ -53,6 +53,7 @@
                                 <li class="list-inline-item"><i class="far fa-eye mr-2"></i></i>{{$post->count_view}}</li>
                             </ul>
                         </div>
+                        <hr>
                         @endforeach
 
                     </div>
